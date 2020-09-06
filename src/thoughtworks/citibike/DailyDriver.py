@@ -1,9 +1,7 @@
-import sys
 import logging
-from pyspark.sql import SparkSession
+
 
 def run(spark, ingest_path, transformation_path):
-
     logging.info("Reading text file from: " + ingest_path)
 
     input_df = spark.read.format("org.apache.spark.csv").option("header", True).csv(ingest_path)

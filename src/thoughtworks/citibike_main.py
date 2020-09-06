@@ -4,8 +4,8 @@ from pyspark.sql import SparkSession
 
 import thoughtworks.citibike.CitibikeTransformer as CitiBikeTransformer
 
-def main(args):
 
+def main(args):
     if len(args) < 4:
         logging.warning("Input source and output path are required")
         sys.exit(1)
