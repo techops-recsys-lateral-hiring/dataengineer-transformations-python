@@ -115,7 +115,7 @@ def test_should_add_distance_column_with_calculated_distance():
 
 
 def create_ingest_and_transform_folders():
-    base_path = tempfile.gettempdir()
+    base_path = tempfile.mkdtemp()
     ingest_folder = "%s%singest" % (base_path, os.path.sep)
     transform_folder = "%s%stransform" % (base_path, os.path.sep)
     ingest_dataframe = SPARK.createDataFrame(SAMPLE_DATA, BASE_COLUMNS)
