@@ -8,5 +8,6 @@ feet_per_mile = 5280
 earth_radius_in_meters = 6371e3
 meters_per_mile = meters_per_foot * feet_per_mile
 
-def computeDistances(spark, dataframe):
+
+def compute_distance(spark, dataframe):
     return dataframe

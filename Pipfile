@@ -5,10 +5,11 @@ verify_ssl = true
 
 [dev-packages]
 pytest = "*"
+pylint = "*"
 
 [packages]
 pyspark = "*"
-data-transformations = {editable = true, path = "."}
+data_transformations = {editable = true, path = "."}
 
 [requires]
 python_version = "3.6"

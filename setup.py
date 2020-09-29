@@ -1,7 +1,7 @@
 import setuptools
 
 setuptools.setup(
-    name="data-transformations",
+    name="data_transformations",
     version="0.1.0",
     author="ThoughtWorks Inc",
     author_email="info@thoughtworks.com",
