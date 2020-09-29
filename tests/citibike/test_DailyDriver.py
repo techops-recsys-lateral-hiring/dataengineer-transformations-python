@@ -1,51 +1,38 @@
+import csv
 import os
-import shutil
-import sys
-import unittest
+import tempfile
 
-from pyspark.sql import SparkSession
-
-import data_transformations.citibike.DailyDriver as DailyDriver
+from data_transformations.citibike import DailyDriver
+from tests.citibike import SPARK
 
 
-class DailyDriverTest(unittest.TestCase):
-    def setUp(self):
-        if not sys.warnoptions:
-            import warnings
-            warnings.simplefilter("ignore")
-        self.spark = SparkSession.builder.appName("DailyDriverTest").getOrCreate()
+def test_should_transform_csv_to_parquet_and_replace_whitespaces_from_column_names():
+    given_ingest_folder, given_transform_folder = create_ingest_and_transform_folders()
+    input_csv_path = given_ingest_folder + 'input.csv'
+    csv_content = [
+        ['first_field', 'field with space', ' fieldWithOuterSpaces '],
+        ['3', '1', '4'],
+        ['1', '5', '2'],
+    ]
+    write_csv_file(input_csv_path, csv_content)
+    DailyDriver.run(SPARK, input_csv_path, given_transform_folder)
 
-    def tearDown(self):
-        self.spark.stop()
+    actual = SPARK.read.parquet(given_transform_folder)
+    expected_columns = ['first_field', 'field_with_space', '_fieldWithOuterSpaces_']
 
-    # @unittest.skip("Ignore test")
-    def test_daily_driver_ingestion(self):
-        print("test_daily_driver_ingestion")
-        root_directory = os.getcwd()
-        file_directory = root_directory + "/test-result"
-        os.makedirs(file_directory, exist_ok=False)
-        # Create input file
-        input_csv = file_directory + "/input.csv"
-        output_directory = root_directory + "/output"
-        lines = ["first_field,field with space, fieldWithOuterSpaces ", "3,1,4", "1,5,2"]
-        with open(input_csv, 'w') as f:
-            for line in lines:
-                print(line, file=f)
-        DailyDriver.run(self.spark, input_csv, output_directory)
-        # Read results
-        parquet_directory = self.spark.read.parquet(output_directory)
-        parquet_directory_count = parquet_directory.count()
-        with self.subTest():
-            self.assertEqual(parquet_directory_count, 2)
-        parquet_directory_columns = parquet_directory.columns
-        expected_column_headings = ["first_field", "field_with_space", "_fieldWithOuterSpaces_"]
-        # Restore directories to original state
-        shutil.rmtree(file_directory)
-        shutil.rmtree(output_directory)
-        os.chdir(root_directory)
-        with self.subTest():
-            self.assertEqual(parquet_directory_columns, expected_column_headings)
+    assert 2 == actual.count()
+    assert expected_columns == actual.columns
 
 
-if __name__ == '__main__':
-    unittest.main()
+def create_ingest_and_transform_folders():
+    base_path = tempfile.mkdtemp()
+    ingest_folder = "%s%s" % (base_path, os.path.sep)
+    transform_folder = "%s%stransform" % (base_path, os.path.sep)
+    return ingest_folder, transform_folder
+
+
+def write_csv_file(file_path, content):
+    with open(file_path, 'w') as csv_file:
+        input_csv_writer = csv.writer(csv_file)
+        input_csv_writer.writerows(content)
+        csv_file.close()
