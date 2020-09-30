@@ -81,7 +81,7 @@ SAMPLE_DATA = [
 
 
 def test_should_maintain_all_data_it_reads():
-    given_ingest_folder, given_transform_folder = create_ingest_and_transform_folders()
+    given_ingest_folder, given_transform_folder = __create_ingest_and_transform_folders()
     given_dataframe = SPARK.read.parquet(given_ingest_folder)
     CitibikeTransformer.run(SPARK, given_ingest_folder, given_transform_folder)
 
@@ -97,7 +97,7 @@ def test_should_maintain_all_data_it_reads():
 
 @pytest.mark.skip()
 def test_should_add_distance_column_with_calculated_distance():
-    given_ingest_folder, given_transform_folder = create_ingest_and_transform_folders()
+    given_ingest_folder, given_transform_folder = __create_ingest_and_transform_folders()
     CitibikeTransformer.run(SPARK, given_ingest_folder, given_transform_folder)
 
     actual_dataframe = SPARK.read.parquet(given_transform_folder)
@@ -114,7 +114,7 @@ def test_should_add_distance_column_with_calculated_distance():
     assert expected_dataframe.collect() == actual_dataframe.collect()
 
 
-def create_ingest_and_transform_folders():
+def __create_ingest_and_transform_folders():
     base_path = tempfile.mkdtemp()
     ingest_folder = "%s%singest" % (base_path, os.path.sep)
     transform_folder = "%s%stransform" % (base_path, os.path.sep)
