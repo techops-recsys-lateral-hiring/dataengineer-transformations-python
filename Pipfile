@@ -6,10 +6,14 @@ verify_ssl = true
 [dev-packages]
 pytest = "*"
 pylint = "*"
+pyspark = "*"
+data-transformations = {editable = true, path = "."}
 
 [packages]
-pyspark = "*"
-data_transformations = {editable = true, path = "."}
+data-transformations = {path = "."}
+
+[scripts]
+package = "python setup.py bdist_egg"
 
 [requires]
 python_version = "3.6"

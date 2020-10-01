@@ -1,25 +1,26 @@
-# data-transformations-with-python
-The purpose of this repo is to build data transformation applications.  The code contains ignored tests.  Please unignore these tests and make them pass.  
+# Data transformations with Python
+The purpose of this repo is to build data transformation applications. The code contains ignored tests. 
+Please unignore these tests and make them pass.  
 
 ## Pre-requisites
 Please make sure you have the following installed and can run them
 * Python 3.6 or later
-* PySpark (`pip install pyspark`)
-* PyCharm IDE
+* Pipenv
 
-The following instructions assumes the command to run Python 3.X is python3
+## Run tests 
+```bash
+pipenv run pytest
+```
 
-## Setup Process
-* Clone the repo
-* cd project/src
-* Test: `python3 -m unittest`
+## Activate virtual environment
+```bash
+pipenv shell
+```
 
-## Pycharm Setup
-* Open downloaded repo in PyCharm
-* In Preferences > Project > Project Structure set src directory to Sources (source root)
-
-###
-
+## Create .egg package
+```bash
+pipenv run package
+```
 
 ### Wordcount
 * Sample data is available in the `src/test/wordcount/data` directory
@@ -39,9 +40,9 @@ The application is run in two steps.
 * Then the application will read the parquet files and apply the appropriate transformations.
 
 
-* To ingest data from external source to datalake:
+* To ingest data from external source to datalake - make sure to package all dependencies first:
 ```
-python3 job_runner.py DailyDriver $(INPUT_LOCATION) $(OUTPUT_LOCATION)
+spark-submit --py-files dist/data_transformations-0.1.0-py3.6.egg --master local citibike_ingest.py $(INPUT_CSV_FILE) $(OUTPUT_LOCATION)
 ```
 
 * To transform Citibike data:

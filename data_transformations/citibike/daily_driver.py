@@ -1,6 +1,4 @@
-import sys
 import logging
-from pyspark.sql import SparkSession
 
 
 def run(spark, ingest_path, transformation_path):

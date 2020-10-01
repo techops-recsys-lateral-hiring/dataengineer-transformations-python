@@ -83,3 +83,4 @@ dmypy.json
 cython_debug/
 .idea
 *.iml
+requirements.txt
