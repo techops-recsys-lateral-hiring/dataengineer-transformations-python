@@ -47,7 +47,7 @@ spark-submit --py-files dist/data_transformations-0.1.0-py3.6.egg --master local
 
 * To transform Citibike data:
 ```
-python3 job_runner.py CitiBikeTransformer $(INPUT_LOCATION) $(OUTPUT_LOCATION)
+spark-submit --py-files dist/data_transformations-0.1.0-py3.6.egg --master local citibike_distance_calculation.py $(INPUT_DATASET_LOCATION) $(OUTPUT_LOCATION)
 ```
 
 Currently this application is a skeleton with ignored tests.  Please unignore the tests and build the Citibike transformation application.
