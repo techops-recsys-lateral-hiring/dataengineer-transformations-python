@@ -65,7 +65,7 @@ class CitibikeTransformerTest(unittest.TestCase):
         with self.subTest():
             self.assertTrue(input.issubset(transformed))
 
-    # @unittest.skip("Ignore test")
+    @unittest.skip("Ignore test")
     def test_acceptance_for_advanced_use(self):
         print("test_acceptance_for_advanced_use")
         root_directory = os.getcwd()

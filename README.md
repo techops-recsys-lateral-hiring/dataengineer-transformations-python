@@ -1,32 +1,33 @@
-# data-transformations-with-python
-The purpose of this repo is to build data transformation applications.  The code contains ignored tests.  Please unignore these tests and make them pass.  
+# Data transformations with Python
+The purpose of this repo is to build data transformation applications. The code contains ignored tests. 
+Please unignore these tests and make them pass.  
 
 ## Pre-requisites
 Please make sure you have the following installed and can run them
 * Python 3.6 or later
-* PySpark (`pip install pyspark`)
-* PyCharm IDE
+* Pipenv
 
-The following instructions assumes the command to run Python 3.X is python3
+## Install all dependencies
+```bash
+pipenv install --dev
+```
 
-## Setup Process
-* Clone the repo
-* cd project/src
-* Test: `python3 -m unittest`
+## Run tests 
+```bash
+pipenv run pytest
+```
 
-## Pycharm Setup
-* Open downloaded repo in PyCharm
-* In Preferences > Project > Project Structure set src directory to Sources (source root)
-
-###
-
+## Activate virtual environment
+```bash
+pipenv shell
+```
 
 ### Wordcount
 * Sample data is available in the `src/test/wordcount/data` directory
 This applications will count the occurrences of a word within a text file. By default this app will read from the words.txt file and write to the target folder.  Pass in the input source path and output path directory to the spark-submit command below if you wish to use different files.
 
 ```
-python3 job_runner.py WordCount $(INPUT_LOCATION) $(OUTPUT_LOCATION)
+pipenv run python job_runner.py WordCount $(INPUT_LOCATION) $(OUTPUT_LOCATION)
 ```
 
 Currently this application is a skeleton with ignored tests.  Please unignore the tests and build the wordcount application.
@@ -41,12 +42,12 @@ The application is run in two steps.
 
 * To ingest data from external source to datalake:
 ```
-python3 job_runner.py DailyDriver $(INPUT_LOCATION) $(OUTPUT_LOCATION)
+pipenv run python job_runner.py DailyDriver $(INPUT_LOCATION) $(OUTPUT_LOCATION)
 ```
 
 * To transform Citibike data:
 ```
-python3 job_runner.py CitiBikeTransformer $(INPUT_LOCATION) $(OUTPUT_LOCATION)
+pipenv run python job_runner.py CitiBikeTransformer $(INPUT_LOCATION) $(OUTPUT_LOCATION)
 ```
 
 Currently this application is a skeleton with ignored tests.  Please unignore the tests and build the Citibike transformation application.
