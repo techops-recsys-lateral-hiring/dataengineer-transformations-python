@@ -17,9 +17,15 @@ pipenv install --dev
 pipenv run pytest
 ```
 
-## Activate virtual environment
+## Package dependencies
+This will create a `data_transformations-*-py3.6.egg` file in the `./dist` folder:
 ```bash
-pipenv shell
+pipenv run packager
+```
+
+## Run linter
+```bash
+pipenv run linter
 ```
 
 ### Wordcount
