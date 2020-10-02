@@ -4,7 +4,7 @@ import tempfile
 import pytest
 from pyspark.sql.types import StructField, DoubleType
 
-import data_transformations.citibike.CitibikeTransformer as CitibikeTransformer
+from data_transformations.citibike import distance_transformer
 from tests.citibike import SPARK
 
 BASE_COLUMNS = [
@@ -83,7 +83,7 @@ SAMPLE_DATA = [
 def test_should_maintain_all_data_it_reads():
     given_ingest_folder, given_transform_folder = __create_ingest_and_transform_folders()
     given_dataframe = SPARK.read.parquet(given_ingest_folder)
-    CitibikeTransformer.run(SPARK, given_ingest_folder, given_transform_folder)
+    distance_transformer.run(SPARK, given_ingest_folder, given_transform_folder)
 
     actual_dataframe = SPARK.read.parquet(given_transform_folder)
     actual_columns = set(actual_dataframe.columns)
@@ -98,7 +98,7 @@ def test_should_maintain_all_data_it_reads():
 @pytest.mark.skip()
 def test_should_add_distance_column_with_calculated_distance():
     given_ingest_folder, given_transform_folder = __create_ingest_and_transform_folders()
-    CitibikeTransformer.run(SPARK, given_ingest_folder, given_transform_folder)
+    distance_transformer.run(SPARK, given_ingest_folder, given_transform_folder)
 
     actual_dataframe = SPARK.read.parquet(given_transform_folder)
     expected_dataframe = SPARK.createDataFrame(
