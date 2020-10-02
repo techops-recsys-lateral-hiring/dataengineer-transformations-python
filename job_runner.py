@@ -1,7 +1,7 @@
 import logging
 import sys
 
-from data_transformations import wordcount_main
+from data_transformations import wordcount_main, citibike_main, daily_driver_main
 
 if __name__ == '__main__':
 
@@ -21,3 +21,7 @@ if __name__ == '__main__':
         sys.exit(1)
     if job_name == "WordCount":
         wordcount_main.main(sys.argv)
+    elif job_name == "CitiBikeTransformer":
+        citibike_main.main(sys.argv)
+    elif job_name == "DailyDriver":
+        daily_driver_main.main(sys.argv)
