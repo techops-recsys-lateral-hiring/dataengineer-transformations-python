@@ -3,7 +3,7 @@ import os
 import tempfile
 
 from data_transformations.citibike import ingest
-from tests.citibike import SPARK
+from tests.integration import SPARK
 
 
 def test_should_do_nothing_for_no_whitespace_in_column_name():

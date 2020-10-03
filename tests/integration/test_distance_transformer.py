@@ -1,11 +1,10 @@
 import os
 import tempfile
 
-import pytest
 from pyspark.sql.types import StructField, DoubleType
 
 from data_transformations.citibike import distance_transformer
-from tests.citibike import SPARK
+from tests.integration import SPARK
 
 BASE_COLUMNS = [
     "tripduration",
@@ -95,7 +94,6 @@ def test_should_maintain_all_data_it_reads():
     assert expected_schema.issubset(actual_schema)
 
 
-@pytest.mark.skip()
 def test_should_add_distance_column_with_calculated_distance():
     given_ingest_folder, given_transform_folder = __create_ingest_and_transform_folders()
     distance_transformer.run(SPARK, given_ingest_folder, given_transform_folder)
