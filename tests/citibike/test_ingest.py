@@ -2,7 +2,7 @@ import csv
 import os
 import tempfile
 
-from data_transformations.citibike import daily_driver
+from data_transformations.citibike import ingest
 from tests.citibike import SPARK
 
 
@@ -15,7 +15,7 @@ def test_should_do_nothing_for_no_whitespace_in_column_name():
         ['1'],
     ]
     __write_csv_file(input_csv_path, csv_content)
-    daily_driver.run(SPARK, input_csv_path, given_transform_folder)
+    ingest.run(SPARK, input_csv_path, given_transform_folder)
 
     actual = SPARK.read.parquet(given_transform_folder)
     expected = SPARK.createDataFrame([['3'], ['1']], csv_content[0])
@@ -32,7 +32,7 @@ def test_should_replace_whitespace_in_between_column_name():
         ['1'],
     ]
     __write_csv_file(input_csv_path, csv_content)
-    daily_driver.run(SPARK, input_csv_path, given_transform_folder)
+    ingest.run(SPARK, input_csv_path, given_transform_folder)
 
     actual = SPARK.read.parquet(given_transform_folder)
     expected = SPARK.createDataFrame([['3'], ['1']], ['first_field'])
@@ -49,7 +49,7 @@ def test_should_replace_whitespace_outside_column_name():
         ['1'],
     ]
     __write_csv_file(input_csv_path, csv_content)
-    daily_driver.run(SPARK, input_csv_path, given_transform_folder)
+    ingest.run(SPARK, input_csv_path, given_transform_folder)
 
     actual = SPARK.read.parquet(given_transform_folder)
     expected = SPARK.createDataFrame([['3'], ['1']], ['_first_field_'])
