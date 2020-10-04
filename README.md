@@ -1,38 +1,70 @@
 # Data transformations with Python
-The purpose of this repo is to build data transformation applications. The code contains ignored tests. 
-Please unignore these tests and make them pass.  
+This is a collection of _Python_ jobs that are supposed to transform data.
+These jobs are using _PySpark_ to process larger volumes of data. These jobs are supposed to run on a Spark cluster.
 
 ## Pre-requisites
 Please make sure you have the following installed and can run them
-* Python 3.6 or later
+* Python (3.6 or later)
 * Pipenv
+* Java (1.8 or later)
 
-## Run tests 
+## Install all dependencies
 ```bash
-pipenv run pytest
+pipenv install
 ```
 
-## Activate virtual environment
+## Run tests
+### Run unit tests
 ```bash
-pipenv shell
+pipenv run unit-test
+```
+
+### Run unit tests
+```bash
+pipenv run integration-test
 ```
 
 ## Create .egg package
 ```bash
-pipenv run package
+pipenv run packager
 ```
 
-### Wordcount
-* Sample data is available in the `src/test/wordcount/data` directory
-This applications will count the occurrences of a word within a text file. By default this app will read from the words.txt file and write to the target folder.  Pass in the input source path and output path directory to the spark-submit command below if you wish to use different files.
-
+## Use linter
+```bash
+pipenv run linter
 ```
-python3 job_runner.py WordCount $(INPUT_LOCATION) $(OUTPUT_LOCATION)
+## Jobs
+### Word Count
+A NLP model is dependent on a specific input file. This job is supposed to preprocess a given text file to produce this
+input file for the NLP model (feature engineering). This job will count the occurrences of a word within the given text
+file. 
+
+There is a dump of the datalake for this under `resources/word_count/words.txt` with a text file.
+
+#### Input
+Simple `*.txt` file containing text.
+
+#### Output
+A single `*.csv` file containing data similar to:
+```csv
+"word","count"
+"a","3"
+"an","5"
 ```
 
-Currently this application is a skeleton with ignored tests.  Please unignore the tests and build the wordcount application.
+#### Run the job
+Please make sure to package the code before submitting the spark job (`pipenv run packager`)
+```bash
+spark-submit --py-files dist/data_transformations-0.1.0-py3.6.egg --master local citibike_ingest.py $(INPUT_CSV_FILE) $(OUTPUT_LOCATION)
+pipenv run spark-submit \
+    --master local \
+    --py-files dist/data_transformations-0.1.0-py3.6.egg \
+    jobs/word_count.py \
+    <INPUT_FILE_PATH> \
+    <OUTPUT_PATH>
+```
 
-### Citibike multi-step pipeline
+### Citibike
 * Sample data is available in the `src/test/citibike/data` directory
 This application takes bike trip information and calculates the "as the crow flies" distance traveled for each trip.  
 The application is run in two steps.
