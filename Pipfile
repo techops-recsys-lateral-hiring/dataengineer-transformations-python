@@ -4,16 +4,19 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-pytest = "*"
+data_transformations = { editable = true, path = "." }
 pylint = "*"
-pyspark = "*"
-data-transformations = {editable = true, path = "."}
+pytest = "*"
 
 [packages]
-data-transformations = {path = "."}
+data_transformations = { path = "." }
+pyspark = "*"
 
 [scripts]
-package = "python setup.py bdist_egg"
+packager = "python setup.py bdist_egg"
+linter = "pylint src tests"
+unit-test = "pytest -k unit"
+integration-test = "pytest -k integration"
 
 [requires]
 python_version = "3.6"

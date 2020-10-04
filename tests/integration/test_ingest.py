@@ -6,53 +6,25 @@ from data_transformations.citibike import ingest
 from tests.integration import SPARK
 
 
-def test_should_do_nothing_for_no_whitespace_in_column_name():
+def test_should_sanitize_column_names():
     given_ingest_folder, given_transform_folder = __create_ingest_and_transform_folders()
     input_csv_path = given_ingest_folder + 'input.csv'
     csv_content = [
-        ['first_field'],
-        ['3'],
-        ['1'],
+        ['first_field', 'field with space', ' fieldWithOuterSpaces '],
+        ['3', '4', '1'],
+        ['1', '5', '2'],
     ]
     __write_csv_file(input_csv_path, csv_content)
     ingest.run(SPARK, input_csv_path, given_transform_folder)
 
     actual = SPARK.read.parquet(given_transform_folder)
-    expected = SPARK.createDataFrame([['3'], ['1']], csv_content[0])
-
-    assert expected.collect() == actual.collect()
-
-
-def test_should_replace_whitespace_in_between_column_name():
-    given_ingest_folder, given_transform_folder = __create_ingest_and_transform_folders()
-    input_csv_path = given_ingest_folder + 'input.csv'
-    csv_content = [
-        ['first field'],
-        ['3'],
-        ['1'],
-    ]
-    __write_csv_file(input_csv_path, csv_content)
-    ingest.run(SPARK, input_csv_path, given_transform_folder)
-
-    actual = SPARK.read.parquet(given_transform_folder)
-    expected = SPARK.createDataFrame([['3'], ['1']], ['first_field'])
-
-    assert expected.collect() == actual.collect()
-
-
-def test_should_replace_whitespace_outside_column_name():
-    given_ingest_folder, given_transform_folder = __create_ingest_and_transform_folders()
-    input_csv_path = given_ingest_folder + 'input.csv'
-    csv_content = [
-        [' first_field '],
-        ['3'],
-        ['1'],
-    ]
-    __write_csv_file(input_csv_path, csv_content)
-    ingest.run(SPARK, input_csv_path, given_transform_folder)
-
-    actual = SPARK.read.parquet(given_transform_folder)
-    expected = SPARK.createDataFrame([['3'], ['1']], ['_first_field_'])
+    expected = SPARK.createDataFrame(
+        [
+            ['3', '4', '1'],
+            ['1', '5', '2']
+        ],
+        ['first_field', 'field_with_space', '_fieldWithOuterSpaces_']
+    )
 
     assert expected.collect() == actual.collect()
 

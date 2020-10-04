@@ -9,6 +9,8 @@ setuptools.setup(
     long_description="data transformations",
     url="https://github.com/ThoughtWorksInc/data-transformations-python",
     packages=setuptools.find_packages(),
+    include_package_data=True,
+    zip_safe=False,
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
