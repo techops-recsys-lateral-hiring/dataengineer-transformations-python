@@ -55,7 +55,6 @@ A single `*.csv` file containing data similar to:
 #### Run the job
 Please make sure to package the code before submitting the spark job (`pipenv run packager`)
 ```bash
-spark-submit --py-files dist/data_transformations-0.1.0-py3.6.egg --master local citibike_ingest.py $(INPUT_CSV_FILE) $(OUTPUT_LOCATION)
 pipenv run spark-submit \
     --master local \
     --py-files dist/data_transformations-0.1.0-py3.6.egg \
