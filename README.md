@@ -107,7 +107,7 @@ pipenv run spark-submit \
 This job takes bike trip information and calculates the "as the crow flies" distance traveled for each trip.
 It reads the previously ingested data parquet files.
 
-Tips:
+Hint:
  - For distance calculation, consider using [**Harvesine formula**](https://en.wikipedia.org/wiki/Haversine_formula) as an option.  
 
 ##### Input
