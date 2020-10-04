@@ -37,7 +37,7 @@ pipenv run linter
 ### Word Count
 A NLP model is dependent on a specific input file. This job is supposed to preprocess a given text file to produce this
 input file for the NLP model (feature engineering). This job will count the occurrences of a word within the given text
-file. 
+file (corpus). 
 
 There is a dump of the datalake for this under `resources/word_count/words.txt` with a text file.
 
@@ -50,6 +50,7 @@ A single `*.csv` file containing data similar to:
 "word","count"
 "a","3"
 "an","5"
+...
 ```
 
 #### Run the job
