@@ -119,7 +119,7 @@ Historical bike ride `*.parquet` files
 ```
 
 ##### Outputs
-`*.parquet` files containing historical with distance column with calculated distances.
+`*.parquet` files containing historical data with distance column containing the calculated distance.
 ```csv
 "tripduration",...,"distance"
 364,...,1.34
