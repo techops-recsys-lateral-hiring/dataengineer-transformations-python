@@ -65,24 +65,74 @@ pipenv run spark-submit \
 ```
 
 ### Citibike
-* Sample data is available in the `src/test/citibike/data` directory
-This application takes bike trip information and calculates the "as the crow flies" distance traveled for each trip.  
-The application is run in two steps.
-* First the data will be ingested from a sources and transformed to parquet format.
-* Then the application will read the parquet files and apply the appropriate transformations.
+For analytics purposes the BI department of a bike share company would like to present dashboards, displaying the
+distance each bike was driven. There is a `*.csv` file that contains historical data of previous bike rides. This input
+file needs to be processed in multiple steps. There is a pipeline running these jobs.
 
+![citibike pipeline](docs/citibike.png)
 
-* To ingest data from external source to datalake - make sure to package all dependencies first:
+There is a dump of the datalake for this under `resources/citibike/citibike.csv` with historical data.
+
+#### Ingest
+Reads a `*.csv` file and transforms it to parquet format. The column names will be sanitized (whitespaces replaced).
+
+##### Input
+Historical bike ride `*.csv` file:
+```csv
+"tripduration","starttime","stoptime","start station id","start station name","start station latitude",...
+364,"2017-07-01 00:00:00","2017-07-01 00:06:05",539,"Metropolitan Ave & Bedford Ave",40.71534825,...
+...
 ```
-spark-submit --py-files dist/data_transformations-0.1.0-py3.6.egg --master local citibike_ingest.py $(INPUT_CSV_FILE) $(OUTPUT_LOCATION)
+
+##### Output
+`*.parquet` files containing the same content
+```csv
+"tripduration","starttime","stoptime","start_station_id","start_station_name","start_station_latitude",...
+364,"2017-07-01 00:00:00","2017-07-01 00:06:05",539,"Metropolitan Ave & Bedford Ave",40.71534825,...
+...
 ```
 
-* To transform Citibike data:
-```
-spark-submit --py-files dist/data_transformations-0.1.0-py3.6.egg --master local citibike_distance_calculation.py $(INPUT_DATASET_LOCATION) $(OUTPUT_LOCATION)
+##### Run the job
+Please make sure to package the code before submitting the spark job (`pipenv run packager`)
+```bash
+pipenv run spark-submit \
+    --master local \
+    --py-files dist/data_transformations-0.1.0-py3.6.egg \
+    jobs/citibike_ingest.py \
+    <INPUT_FILE_PATH> \
+    <OUTPUT_PATH>
 ```
 
-Currently this application is a skeleton with ignored tests.  Please unignore the tests and build the Citibike transformation application.
+#### Distance calculation
+This job takes bike trip information and calculates the "as the crow flies" distance traveled for each trip.
+It reads the previously ingested data parquet files.
 
-#### Tips
-- For distance calculation, consider using [**Harvesine formula**](https://en.wikipedia.org/wiki/Haversine_formula) as an option.  
+Tips:
+ - For distance calculation, consider using [**Harvesine formula**](https://en.wikipedia.org/wiki/Haversine_formula) as an option.  
+
+##### Input
+Historical bike ride `*.parquet` files
+```csv
+"tripduration",...
+364,...
+...
+```
+
+##### Outputs
+`*.parquet` files containing historical with distance column with calculated distances.
+```csv
+"tripduration",...,"distance"
+364,...,1.34
+...
+```
+
+##### Run the job
+Please make sure to package the code before submitting the spark job (`pipenv run packager`)
+```bash
+pipenv run spark-submit \
+    --master local \
+    --py-files dist/data_transformations-0.1.0-py3.6.egg \
+    jobs/citibike_distance_calculation.py \
+    <INPUT_PATH> \
+    <OUTPUT_PATH>
+```
