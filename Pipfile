@@ -14,7 +14,7 @@ pyspark = "*"
 
 [scripts]
 packager = "python setup.py bdist_egg"
-linter = "pylint src tests"
+linter = "pylint data_transformations tests"
 unit-test = "pytest -k unit"
 integration-test = "pytest -k integration"
 

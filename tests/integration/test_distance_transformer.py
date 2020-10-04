@@ -107,8 +107,10 @@ def test_should_add_distance_column_with_calculated_distance():
         ],
         BASE_COLUMNS + ['distance']
     )
+    expected_distance_schema = StructField('distance', DoubleType(), nullable=True)
+    actual_distance_schema = actual_dataframe.schema['distance']
 
-    assert StructField('distance', DoubleType(), nullable=True) == actual_dataframe.schema['distance']
+    assert expected_distance_schema == actual_distance_schema
     assert expected_dataframe.collect() == actual_dataframe.collect()
 
 

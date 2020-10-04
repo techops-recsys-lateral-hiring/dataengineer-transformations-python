@@ -6,7 +6,7 @@ def sanitize_columns(columns):
 
 
 def run(spark, ingest_path, transformation_path):
-    logging.info("Reading text file from: " + ingest_path)
+    logging.info("Reading text file from: %s", ingest_path)
     input_df = spark.read.format("org.apache.spark.csv").option("header", True).csv(ingest_path)
     renamed_columns = sanitize_columns(input_df.columns)
     ref_df = input_df.toDF(*renamed_columns)
