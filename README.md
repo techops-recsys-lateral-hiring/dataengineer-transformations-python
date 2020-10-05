@@ -19,7 +19,7 @@ pipenv install
 pipenv run unit-test
 ```
 
-### Run unit tests
+### Run integration tests
 ```bash
 pipenv run integration-test
 ```
