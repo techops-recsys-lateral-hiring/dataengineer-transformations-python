@@ -1,6 +1,6 @@
 # Data transformations with Python
 This is a collection of _Python_ jobs that are supposed to transform data.
-These jobs are using _PySpark_ to process larger volumes of data. These jobs are supposed to run on a Spark cluster.
+These jobs are using _PySpark_ to process larger volumes of data and are supposed to run on a Spark cluster (via `spark-submit`).
 
 ## Pre-requisites
 Please make sure you have the following installed and can run them
