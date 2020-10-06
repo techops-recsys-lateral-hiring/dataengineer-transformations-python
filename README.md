@@ -1,55 +1,138 @@
-# data-transformations-with-python
-The purpose of this repo is to build data transformation applications.  The code contains ignored tests.  Please unignore these tests and make them pass.  
+# Data transformations with Python
+This is a collection of _Python_ jobs that are supposed to transform data.
+These jobs are using _PySpark_ to process larger volumes of data and are supposed to run on a _Spark_ cluster (via `spark-submit`).
 
 ## Pre-requisites
 Please make sure you have the following installed and can run them
-* Python 3.6 or later
-* PySpark (`pip install pyspark`)
-* PyCharm IDE
+* Python (3.6 or later)
+* Pipenv
+* Java (1.8 or later)
 
-The following instructions assumes the command to run Python 3.X is python3
-
-## Setup Process
-* Clone the repo
-* cd project/src
-* Test: `python3 -m unittest`
-
-## Pycharm Setup
-* Open downloaded repo in PyCharm
-* In Preferences > Project > Project Structure set src directory to Sources (source root)
-
-###
-
-
-### Wordcount
-* Sample data is available in the `src/test/wordcount/data` directory
-This applications will count the occurrences of a word within a text file. By default this app will read from the words.txt file and write to the target folder.  Pass in the input source path and output path directory to the spark-submit command below if you wish to use different files.
-
-```
-python3 job_runner.py WordCount $(INPUT_LOCATION) $(OUTPUT_LOCATION)
+## Install all dependencies
+```bash
+pipenv install
 ```
 
-Currently this application is a skeleton with ignored tests.  Please unignore the tests and build the wordcount application.
-
-### Citibike multi-step pipeline
-* Sample data is available in the `src/test/citibike/data` directory
-This application takes bike trip information and calculates the "as the crow flies" distance traveled for each trip.  
-The application is run in two steps.
-* First the data will be ingested from a sources and transformed to parquet format.
-* Then the application will read the parquet files and apply the appropriate transformations.
-
-
-* To ingest data from external source to datalake:
-```
-python3 job_runner.py DailyDriver $(INPUT_LOCATION) $(OUTPUT_LOCATION)
+## Run tests
+### Run unit tests
+```bash
+pipenv run unit-test
 ```
 
-* To transform Citibike data:
-```
-python3 job_runner.py CitiBikeTransformer $(INPUT_LOCATION) $(OUTPUT_LOCATION)
+### Run integration tests
+```bash
+pipenv run integration-test
 ```
 
-Currently this application is a skeleton with ignored tests.  Please unignore the tests and build the Citibike transformation application.
+## Create .egg package
+```bash
+pipenv run packager
+```
 
-#### Tips
-- For distance calculation, consider using [**Harvesine formula**](https://en.wikipedia.org/wiki/Haversine_formula) as an option.  
+## Use linter
+```bash
+pipenv run linter
+```
+## Jobs
+### Word Count
+A NLP model is dependent on a specific input file. This job is supposed to preprocess a given text file to produce this
+input file for the NLP model (feature engineering). This job will count the occurrences of a word within the given text
+file (corpus). 
+
+There is a dump of the datalake for this under `resources/word_count/words.txt` with a text file.
+
+#### Input
+Simple `*.txt` file containing text.
+
+#### Output
+A single `*.csv` file containing data similar to:
+```csv
+"word","count"
+"a","3"
+"an","5"
+...
+```
+
+#### Run the job
+Please make sure to package the code before submitting the spark job (`pipenv run packager`)
+```bash
+pipenv run spark-submit \
+    --master local \
+    --py-files dist/data_transformations-0.1.0-py3.6.egg \
+    jobs/word_count.py \
+    <INPUT_FILE_PATH> \
+    <OUTPUT_PATH>
+```
+
+### Citibike
+For analytics purposes the BI department of a bike share company would like to present dashboards, displaying the
+distance each bike was driven. There is a `*.csv` file that contains historical data of previous bike rides. This input
+file needs to be processed in multiple steps. There is a pipeline running these jobs.
+
+![citibike pipeline](docs/citibike.png)
+
+There is a dump of the datalake for this under `resources/citibike/citibike.csv` with historical data.
+
+#### Ingest
+Reads a `*.csv` file and transforms it to parquet format. The column names will be sanitized (whitespaces replaced).
+
+##### Input
+Historical bike ride `*.csv` file:
+```csv
+"tripduration","starttime","stoptime","start station id","start station name","start station latitude",...
+364,"2017-07-01 00:00:00","2017-07-01 00:06:05",539,"Metropolitan Ave & Bedford Ave",40.71534825,...
+...
+```
+
+##### Output
+`*.parquet` files containing the same content
+```csv
+"tripduration","starttime","stoptime","start_station_id","start_station_name","start_station_latitude",...
+364,"2017-07-01 00:00:00","2017-07-01 00:06:05",539,"Metropolitan Ave & Bedford Ave",40.71534825,...
+...
+```
+
+##### Run the job
+Please make sure to package the code before submitting the spark job (`pipenv run packager`)
+```bash
+pipenv run spark-submit \
+    --master local \
+    --py-files dist/data_transformations-0.1.0-py3.6.egg \
+    jobs/citibike_ingest.py \
+    <INPUT_FILE_PATH> \
+    <OUTPUT_PATH>
+```
+
+#### Distance calculation
+This job takes bike trip information and calculates the "as the crow flies" distance traveled for each trip.
+It reads the previously ingested data parquet files.
+
+Hint:
+ - For distance calculation, consider using [**Harvesine formula**](https://en.wikipedia.org/wiki/Haversine_formula) as an option.  
+
+##### Input
+Historical bike ride `*.parquet` files
+```csv
+"tripduration",...
+364,...
+...
+```
+
+##### Outputs
+`*.parquet` files containing historical data with distance column containing the calculated distance.
+```csv
+"tripduration",...,"distance"
+364,...,1.34
+...
+```
+
+##### Run the job
+Please make sure to package the code before submitting the spark job (`pipenv run packager`)
+```bash
+pipenv run spark-submit \
+    --master local \
+    --py-files dist/data_transformations-0.1.0-py3.6.egg \
+    jobs/citibike_distance_calculation.py \
+    <INPUT_PATH> \
+    <OUTPUT_PATH>
+```
