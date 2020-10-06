@@ -3,7 +3,7 @@ import setuptools
 setuptools.setup(
     name="data_transformations",
     version="0.1.0",
-    author="ThoughtWorks Inc",
+    author="ThoughtWorks",
     author_email="info@thoughtworks.com",
     description="data transformations",
     long_description="data transformations",
@@ -13,7 +13,7 @@ setuptools.setup(
     zip_safe=False,
     classifiers=[
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: MIT License",
+        "License :: OSI Approved :: Apache License 2.0",
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.6',
