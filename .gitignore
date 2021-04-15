@@ -85,3 +85,4 @@ cython_debug/
 *.iml
 requirements.txt
 .python-version
+.envrc
