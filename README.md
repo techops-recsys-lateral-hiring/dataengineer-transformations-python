@@ -10,7 +10,7 @@ Please make sure you have the following installed and can run them
 
 ## Install all dependencies
 ```bash
-pipenv install
+pipenv install --dev
 ```
 
 ## Run tests
