@@ -1,6 +1,8 @@
 import os
 import tempfile
 
+import pytest
+
 from data_transformations.wordcount import word_count_transformer
 from tests.integration import SPARK
 
@@ -16,6 +18,7 @@ def _get_file_paths(input_file_lines):
     return input_text_path, output_path
 
 
+@pytest.mark.skip
 def test_should_tokenize_words_and_count_them():
     lines = [
         "In my younger and more vulnerable years my father gave me some advice that I've been"
