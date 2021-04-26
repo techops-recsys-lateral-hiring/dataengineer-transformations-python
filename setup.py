@@ -7,7 +7,7 @@ setuptools.setup(
     author_email="info@thoughtworks.com",
     description="data transformations",
     long_description="data transformations",
-    url="https://github.com/ThoughtWorksInc/data-transformations-python",
+    url="https://github.com/techops-recsys-lateral-hiring/dataengineer-transformations-python",
     packages=setuptools.find_packages(),
     include_package_data=True,
     zip_safe=False,
