@@ -10,7 +10,7 @@ Please make sure you have the following installed and can run them
 
 ## Install all dependencies
 ```bash
-pipenv install
+pipenv install --dev
 ```
 
 ## Run tests
@@ -34,6 +34,12 @@ pipenv run packager
 pipenv run linter
 ```
 ## Jobs
+
+There are two applications in this repo: Word Count, and Citibike.
+
+Currently these exist as skeletons, and have some initial test cases which are defined but ignored.
+For each application, please un-ignore the tests and implement the missing logic.
+
 ### Word Count
 A NLP model is dependent on a specific input file. This job is supposed to preprocess a given text file to produce this
 input file for the NLP model (feature engineering). This job will count the occurrences of a word within the given text
