@@ -84,3 +84,5 @@ cython_debug/
 .idea
 *.iml
 requirements.txt
+.python-version
+.envrc
