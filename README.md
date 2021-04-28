@@ -4,7 +4,7 @@ These jobs are using _PySpark_ to process larger volumes of data and are suppose
 
 ## Pre-requisites
 Please make sure you have the following installed and can run them
-* Python (3.6 or later)
+* Python (3.9 or later)
 * Pipenv
 * Java (1.8 or later)
 
@@ -64,7 +64,7 @@ Please make sure to package the code before submitting the spark job (`pipenv ru
 ```bash
 pipenv run spark-submit \
     --master local \
-    --py-files dist/data_transformations-0.1.0-py3.6.egg \
+    --py-files dist/data_transformations-0.1.0-py3.9.egg \
     jobs/word_count.py \
     <INPUT_FILE_PATH> \
     <OUTPUT_PATH>
@@ -103,7 +103,7 @@ Please make sure to package the code before submitting the spark job (`pipenv ru
 ```bash
 pipenv run spark-submit \
     --master local \
-    --py-files dist/data_transformations-0.1.0-py3.6.egg \
+    --py-files dist/data_transformations-0.1.0-py3.9.egg \
     jobs/citibike_ingest.py \
     <INPUT_FILE_PATH> \
     <OUTPUT_PATH>
@@ -137,7 +137,7 @@ Please make sure to package the code before submitting the spark job (`pipenv ru
 ```bash
 pipenv run spark-submit \
     --master local \
-    --py-files dist/data_transformations-0.1.0-py3.6.egg \
+    --py-files dist/data_transformations-0.1.0-py3.9.egg \
     jobs/citibike_distance_calculation.py \
     <INPUT_PATH> \
     <OUTPUT_PATH>
