@@ -1,8 +1,8 @@
 import os
 import tempfile
+from typing import Tuple
 
 import pytest
-
 from pyspark.sql.types import StructField, DoubleType
 
 from data_transformations.citibike import distance_transformer
@@ -81,7 +81,7 @@ SAMPLE_DATA = [
 ]
 
 
-def test_should_maintain_all_data_it_reads():
+def test_should_maintain_all_data_it_reads() -> None:
     given_ingest_folder, given_transform_folder = __create_ingest_and_transform_folders()
     given_dataframe = SPARK.read.parquet(given_ingest_folder)
     distance_transformer.run(SPARK, given_ingest_folder, given_transform_folder)
@@ -95,8 +95,9 @@ def test_should_maintain_all_data_it_reads():
     assert expected_columns == actual_columns
     assert expected_schema.issubset(actual_schema)
 
+
 @pytest.mark.skip
-def test_should_add_distance_column_with_calculated_distance():
+def test_should_add_distance_column_with_calculated_distance() -> None:
     given_ingest_folder, given_transform_folder = __create_ingest_and_transform_folders()
     distance_transformer.run(SPARK, given_ingest_folder, given_transform_folder)
 
@@ -116,7 +117,7 @@ def test_should_add_distance_column_with_calculated_distance():
     assert expected_dataframe.collect() == actual_dataframe.collect()
 
 
-def __create_ingest_and_transform_folders():
+def __create_ingest_and_transform_folders() -> Tuple[str, str]:
     base_path = tempfile.mkdtemp()
     ingest_folder = "%s%singest" % (base_path, os.path.sep)
     transform_folder = "%s%stransform" % (base_path, os.path.sep)

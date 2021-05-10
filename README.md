@@ -40,6 +40,7 @@ More: https://python-poetry.org/docs/cli/#build
 ```bash
 make style-checks
 ```
+This is running the linter and a type checker.
 
 ## Jobs
 

@@ -1,7 +1,9 @@
 import logging
 
+from pyspark.sql import SparkSession
 
-def run(spark, input_path, output_path):
+
+def run(spark: SparkSession, input_path: str, output_path: str) -> None:
     logging.info("Reading text file from: %s", input_path)
     input_df = spark.read.text(input_path)
 

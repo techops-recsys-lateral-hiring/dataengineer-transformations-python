@@ -1,5 +1,6 @@
 import os
 import tempfile
+from typing import Tuple, List
 
 import pytest
 
@@ -7,7 +8,7 @@ from data_transformations.wordcount import word_count_transformer
 from tests.integration import SPARK
 
 
-def _get_file_paths(input_file_lines):
+def _get_file_paths(input_file_lines: List[str]) -> Tuple[str, str]:
     base_path = tempfile.mkdtemp()
 
     input_text_path = "%s%sinput.txt" % (base_path, os.path.sep)
@@ -19,7 +20,7 @@ def _get_file_paths(input_file_lines):
 
 
 @pytest.mark.skip
-def test_should_tokenize_words_and_count_them():
+def test_should_tokenize_words_and_count_them() -> None:
     lines = [
         "In my younger and more vulnerable years my father gave me some advice that I've been "
         "turning over in my mind ever since. \"Whenever you feel like criticising any one,\""
