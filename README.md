@@ -4,40 +4,49 @@ These jobs are using _PySpark_ to process larger volumes of data and are suppose
 
 ## Pre-requisites
 Please make sure you have the following installed and can run them
-* Python (3.9 or later)
-* Pipenv
-* Java (1.8 or later)
+* Python (3.9 or later), you can use for example [pyenv](https://github.com/pyenv/pyenv#installation) to manage your python versions locally
+* [Poetry](https://python-poetry.org/docs/#installation)
+* Java (1.8)
 
 ## Install all dependencies
 ```bash
-pipenv install --dev
+poetry install
 ```
 
 ## Run tests
+To run all tests and checks:
+```bash
+make tests
+```
+
 ### Run unit tests
 ```bash
-pipenv run unit-test
+make unit-test
 ```
 
 ### Run integration tests
 ```bash
-pipenv run integration-test
+make integration-test
 ```
 
-## Create .egg package
+## Create package
+This will create a `tar.gz` and a `.wheel` in `dist/` folder:
 ```bash
-pipenv run packager
+poetry build
 ```
+More: https://python-poetry.org/docs/cli/#build
 
-## Use linter
+## Run style checks
 ```bash
-pipenv run linter
+make style-checks
 ```
+This is running the linter and a type checker.
+
 ## Jobs
 
 There are two applications in this repo: Word Count, and Citibike.
 
-Currently these exist as skeletons, and have some initial test cases which are defined but ignored.
+Currently, these exist as skeletons, and have some initial test cases which are defined but ignored.
 For each application, please un-ignore the tests and implement the missing logic.
 
 ### Word Count
@@ -60,11 +69,11 @@ A single `*.csv` file containing data similar to:
 ```
 
 #### Run the job
-Please make sure to package the code before submitting the spark job (`pipenv run packager`)
+Please make sure to package the code before submitting the spark job (`poetry build`)
 ```bash
-pipenv run spark-submit \
+poetry run spark-submit \
     --master local \
-    --py-files dist/data_transformations-0.1.0-py3.9.egg \
+    --py-files dist/data_transformations-*.whl \
     jobs/word_count.py \
     <INPUT_FILE_PATH> \
     <OUTPUT_PATH>
@@ -99,11 +108,11 @@ Historical bike ride `*.csv` file:
 ```
 
 ##### Run the job
-Please make sure to package the code before submitting the spark job (`pipenv run packager`)
+Please make sure to package the code before submitting the spark job (`poetry build`)
 ```bash
-pipenv run spark-submit \
+poetry run spark-submit \
     --master local \
-    --py-files dist/data_transformations-0.1.0-py3.9.egg \
+    --py-files dist/data_transformations-*.whl \
     jobs/citibike_ingest.py \
     <INPUT_FILE_PATH> \
     <OUTPUT_PATH>
@@ -133,11 +142,11 @@ Historical bike ride `*.parquet` files
 ```
 
 ##### Run the job
-Please make sure to package the code before submitting the spark job (`pipenv run packager`)
+Please make sure to package the code before submitting the spark job (`poetry build`)
 ```bash
-pipenv run spark-submit \
+poetry run spark-submit \
     --master local \
-    --py-files dist/data_transformations-0.1.0-py3.9.egg \
+    --py-files dist/data_transformations-*.whl \
     jobs/citibike_distance_calculation.py \
     <INPUT_PATH> \
     <OUTPUT_PATH>
