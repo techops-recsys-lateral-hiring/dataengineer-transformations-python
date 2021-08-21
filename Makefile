@@ -20,7 +20,7 @@ type-check:
 style-checks: lint-check type-check
 
 .PHONY: tests
-tests: style-checks unit-test integration-test
+tests: unit-test integration-test
 
 requirements.txt:
 	poetry export -f requirements.txt --output requirements.txt --dev

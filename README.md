@@ -14,7 +14,7 @@ poetry install
 ```
 
 ## Run tests
-To run all tests and checks:
+To run all tests:
 ```bash
 make tests
 ```
