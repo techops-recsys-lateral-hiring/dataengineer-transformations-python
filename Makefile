@@ -24,3 +24,7 @@ tests: unit-test integration-test
 
 requirements.txt:
 	poetry export -f requirements.txt --output requirements.txt --dev
+
+.PHONY: docker-tests
+docker-tests:
+	./scripts/spark-docker-tests.sh
