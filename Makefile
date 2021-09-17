@@ -28,3 +28,7 @@ requirements.txt:
 .PHONY: docker-tests
 docker-tests:
 	./scripts/spark-docker-tests.sh
+
+.PHONY: docker-tests-win
+docker-tests:
+	./scripts/spark-docker-tests.bat
