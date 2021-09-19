@@ -86,3 +86,7 @@ cython_debug/
 requirements.txt
 .python-version
 .envrc
+output
+
+# batect
+.batect/caches/key
