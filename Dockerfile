@@ -16,15 +16,7 @@ ENV PATH="/root/.poetry/bin:${PATH}"
 #TODO : Change the user to non root user
 #USER 185
 WORKDIR /app
-COPY ./data_transformations /app/data_transformations
-COPY ./tests /app/tests
-COPY ./resources /app/resources
-COPY ./jobs /app/jobs
-COPY ./.pylintrc /app/
-COPY ./Makefile /app/
-COPY ./poetry.lock /app/
-COPY ./pyproject.toml /app/
+
+COPY ./pyproject.toml /app/pyproject.toml
+
 RUN poetry install
-ARG ARG_RUN_ACTION
-ENV RUN_ACTION=$ARG_RUN_ACTION
-ENTRYPOINT exec make $RUN_ACTION

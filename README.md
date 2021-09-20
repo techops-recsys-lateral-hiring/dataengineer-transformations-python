@@ -8,37 +8,36 @@ Please make sure you have the following installed and can run them
 * [Poetry](https://python-poetry.org/docs/#installation)
 * Java (1.8)
 
-## Install all dependencies
+## Install dependencies
+
+We use [`batect`](https://batect.dev/) to dockerise the tasks in this exercise. 
+`batect` is a lightweight wrapper around Docker that helps to ensure tasks run consistently (across linux, mac windows).
+With `batect`, the only dependencies that need to be installed are Docker and Java >=8. Every other dependency is managed inside Docker containers
+
 ```bash
-poetry install
+# Install pre-requisites needed by batect 
+# For mac users: 
+scripts/go.sh
+
+# For windows/linux users:
+# TODO: create go script to ensure docker and java >=8 is installed
 ```
 
 ## Run tests
-To run all tests:
-```bash
-make tests
-```
 
 ### Run unit tests
 ```bash
-make unit-test
+./batect unit-test
 ```
 
 ### Run integration tests
 ```bash
-make integration-test
+./batect integration-test
 ```
-
-## Create package
-This will create a `tar.gz` and a `.wheel` in `dist/` folder:
-```bash
-poetry build
-```
-More: https://python-poetry.org/docs/cli/#build
 
 ## Run style checks
 ```bash
-make style-checks
+./batect style-checks
 ```
 This is running the linter and a type checker.
 
@@ -69,14 +68,9 @@ A single `*.csv` file containing data similar to:
 ```
 
 #### Run the job
-Please make sure to package the code before submitting the spark job (`poetry build`)
+
 ```bash
-poetry run spark-submit \
-    --master local \
-    --py-files dist/data_transformations-*.whl \
-    jobs/word_count.py \
-    <INPUT_FILE_PATH> \
-    <OUTPUT_PATH>
+./batect run-job
 ```
 
 ### Citibike
@@ -108,14 +102,9 @@ Historical bike ride `*.csv` file:
 ```
 
 ##### Run the job
-Please make sure to package the code before submitting the spark job (`poetry build`)
+
 ```bash
-poetry run spark-submit \
-    --master local \
-    --py-files dist/data_transformations-*.whl \
-    jobs/citibike_ingest.py \
-    <INPUT_FILE_PATH> \
-    <OUTPUT_PATH>
+./batect run-job
 ```
 
 #### Distance calculation
@@ -142,12 +131,7 @@ Historical bike ride `*.parquet` files
 ```
 
 ##### Run the job
-Please make sure to package the code before submitting the spark job (`poetry build`)
+
 ```bash
-poetry run spark-submit \
-    --master local \
-    --py-files dist/data_transformations-*.whl \
-    jobs/citibike_distance_calculation.py \
-    <INPUT_PATH> \
-    <OUTPUT_PATH>
+./batect run-job
 ```
