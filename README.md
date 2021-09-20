@@ -70,7 +70,7 @@ A single `*.csv` file containing data similar to:
 #### Run the job
 
 ```bash
-./batect run-job
+JOB=jobs/word_count.py ./batect run-job 
 ```
 
 ### Citibike
@@ -104,7 +104,7 @@ Historical bike ride `*.csv` file:
 ##### Run the job
 
 ```bash
-./batect run-job
+JOB=jobs/citibike_ingest.py ./batect run-job
 ```
 
 #### Distance calculation
@@ -133,5 +133,5 @@ Historical bike ride `*.parquet` files
 ##### Run the job
 
 ```bash
-./batect run-job
+JOB=jobs/citibike_distance_calculation.py ./batect run-job
 ```
