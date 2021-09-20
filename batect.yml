@@ -1,6 +1,6 @@
 containers:
   pyspark:
-    build_directory: .batect/pyspark
+    build_directory: .
     volumes:
       - local: .
         container: /app

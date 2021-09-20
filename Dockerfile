@@ -16,3 +16,7 @@ ENV PATH="/root/.poetry/bin:${PATH}"
 #TODO : Change the user to non root user
 #USER 185
 WORKDIR /app
+
+COPY ./pyproject.toml /app/pyproject.toml
+
+RUN poetry install

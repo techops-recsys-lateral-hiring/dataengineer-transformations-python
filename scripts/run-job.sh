@@ -2,8 +2,6 @@
 
 set -e
 
-poetry install
-
 poetry build
 
 INPUT_FILE_PATH="./resources/citibike/citibike.csv"
