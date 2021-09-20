@@ -20,7 +20,8 @@ With `batect`, the only dependencies that need to be installed are Docker and Ja
 scripts/go.sh
 
 # For windows/linux users:
-# TODO: create go script to ensure docker and java >=8 is installed
+# Please ensure Docker and java >=8 is installed 
+# TODO: add link for installing java on windows/linux
 ```
 
 ## Run tests
