@@ -37,3 +37,5 @@ tasks:
     run:
       container: pyspark
       entrypoint: scripts/run-job.sh
+      environment:
+        JOB: $JOB

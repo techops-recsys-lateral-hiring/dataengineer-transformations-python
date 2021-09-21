@@ -20,7 +20,8 @@ With `batect`, the only dependencies that need to be installed are Docker and Ja
 scripts/go.sh
 
 # For windows/linux users:
-# TODO: create go script to ensure docker and java >=8 is installed
+# Please ensure Docker and java >=8 is installed 
+# TODO: add link for installing java on windows/linux
 ```
 
 ## Run tests
@@ -70,7 +71,7 @@ A single `*.csv` file containing data similar to:
 #### Run the job
 
 ```bash
-./batect run-job
+JOB=jobs/word_count.py ./batect run-job 
 ```
 
 ### Citibike
@@ -104,7 +105,7 @@ Historical bike ride `*.csv` file:
 ##### Run the job
 
 ```bash
-./batect run-job
+JOB=jobs/citibike_ingest.py ./batect run-job
 ```
 
 #### Distance calculation
@@ -133,5 +134,5 @@ Historical bike ride `*.parquet` files
 ##### Run the job
 
 ```bash
-./batect run-job
+JOB=jobs/citibike_distance_calculation.py ./batect run-job
 ```
