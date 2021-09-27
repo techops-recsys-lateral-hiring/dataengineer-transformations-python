@@ -11,5 +11,5 @@ echo "Installing java if it's not installed..."
 which java
 if [ $? -ne 0 ]; then
   brew tap adoptopenjdk/openjdk
-  brew cask install adoptopenjdk8
+  brew cask install adoptopenjdk11
 fi
