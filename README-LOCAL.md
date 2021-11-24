@@ -3,42 +3,42 @@ This is a collection of _Python_ jobs that are supposed to transform data.
 These jobs are using _PySpark_ to process larger volumes of data and are supposed to run on a _Spark_ cluster (via `spark-submit`).
 
 ## Pre-requisites
-
-We use [`batect`](https://batect.dev/) to dockerise the tasks in this exercise. 
-`batect` is a lightweight wrapper around Docker that helps to ensure tasks run consistently (across linux, mac windows).
-With `batect`, the only dependencies that need to be installed are Docker and Java >=8. Every other dependency is managed inside Docker containers.
 Please make sure you have the following installed and can run them
-* Docker
+* Python (3.9 or later), you can use for example [pyenv](https://github.com/pyenv/pyenv#installation) to manage your python versions locally
+* [Poetry](https://python-poetry.org/docs/#installation)
 * Java (1.8)
 
-You could use following instructions as guidelines to install Docker and Java.
-
+## Install all dependencies
 ```bash
-# Install pre-requisites needed by batect 
-# For mac users: 
-scripts/install.sh
-
-# For windows/linux users:
-# Please ensure Docker and java >=8 is installed 
-scripts\install_choco.ps1
-scripts\install.bat
+poetry install
 ```
 
 ## Run tests
+To run all tests:
+```bash
+make tests
+```
 
 ### Run unit tests
 ```bash
-./batect unit-test
+make unit-test
 ```
 
 ### Run integration tests
 ```bash
-./batect integration-test
+make integration-test
 ```
+
+## Create package
+This will create a `tar.gz` and a `.wheel` in `dist/` folder:
+```bash
+poetry build
+```
+More: https://python-poetry.org/docs/cli/#build
 
 ## Run style checks
 ```bash
-./batect style-checks
+make style-checks
 ```
 This is running the linter and a type checker.
 
@@ -69,9 +69,14 @@ A single `*.csv` file containing data similar to:
 ```
 
 #### Run the job
-
+Please make sure to package the code before submitting the spark job (`poetry build`)
 ```bash
-JOB=jobs/word_count.py ./batect run-job 
+poetry run spark-submit \
+    --master local \
+    --py-files dist/data_transformations-*.whl \
+    jobs/word_count.py \
+    <INPUT_FILE_PATH> \
+    <OUTPUT_PATH>
 ```
 
 ### Citibike
@@ -103,9 +108,14 @@ Historical bike ride `*.csv` file:
 ```
 
 ##### Run the job
-
+Please make sure to package the code before submitting the spark job (`poetry build`)
 ```bash
-JOB=jobs/citibike_ingest.py ./batect run-job
+poetry run spark-submit \
+    --master local \
+    --py-files dist/data_transformations-*.whl \
+    jobs/citibike_ingest.py \
+    <INPUT_FILE_PATH> \
+    <OUTPUT_PATH>
 ```
 
 #### Distance calculation
@@ -132,11 +142,12 @@ Historical bike ride `*.parquet` files
 ```
 
 ##### Run the job
-
+Please make sure to package the code before submitting the spark job (`poetry build`)
 ```bash
-JOB=jobs/citibike_distance_calculation.py ./batect run-job
+poetry run spark-submit \
+    --master local \
+    --py-files dist/data_transformations-*.whl \
+    jobs/citibike_distance_calculation.py \
+    <INPUT_PATH> \
+    <OUTPUT_PATH>
 ```
-
-## Running the code outside container
-
-If you would like to run the code in your laptop locally without containers then please follow instructions [here](README-LOCAL.md).
