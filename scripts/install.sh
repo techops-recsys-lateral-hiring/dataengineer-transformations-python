@@ -5,7 +5,7 @@ echo "Installing homebrew if it's not installed..."
 which brew || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 echo "Installing docker if it's not installed..."
-which docker || brew cask install docker
+which docker || brew install docker
 
 echo "Installing java if it's not installed..."
 which java
