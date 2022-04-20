@@ -29,7 +29,7 @@ tasks:
     group: Test
     run:
       container: pyspark
-      entrypoint: scripts/style-checks.sh
+      entrypoint: scripts/linting.sh
 
   run-job:
     description: Run spark job

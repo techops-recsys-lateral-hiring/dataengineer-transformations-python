@@ -1,11 +1,13 @@
 #!/bin/sh
 
+set -euo pipefail
+
 # batect dependencies
 echo "Installing homebrew if it's not installed..."
 which brew || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
-echo "Installing docker if it's not installed..."
-which docker || brew cask install docker
+echo "Installing docker desktop if it's not installed..."
+which docker || brew install --cask docker
 
 echo "Installing java if it's not installed..."
 which java
