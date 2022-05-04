@@ -143,73 +143,73 @@ function precommit() {
 
 function install-with-docker-desktop() {
     trace "Install the application requirements along with docker desktop"
-    ./scripts/install-with-docker-desktop.sh "${subcommand_opts[@]:+${subcommand_opts[@]}}"
+    ./scripts/mac_or_linux/install-with-docker-desktop.sh "${subcommand_opts[@]:+${subcommand_opts[@]}}"
 }
 
 
 function install-with-colima() {
     trace "Install the application requirements along with docker desktop"
-    ./scripts/install-with-colima.sh "${subcommand_opts[@]:+${subcommand_opts[@]}}"
+    ./scripts/mac_or_linux/install-with-colima.sh "${subcommand_opts[@]:+${subcommand_opts[@]}}"
 }
 
 
 function start-colima() {
     trace "Starting Colima"
-    ./scripts/start-colima.sh "${subcommand_opts[@]:+${subcommand_opts[@]}}"
+    ./scripts/mac_or_linux/start-colima.sh "${subcommand_opts[@]:+${subcommand_opts[@]}}"
 }
 
 
 function run-local-unit-test() {
     trace "Running unit tests on local machine"
-    ./scripts/unit-test.sh "${subcommand_opts[@]:+${subcommand_opts[@]}}"
+    ./scripts/mac_or_linux/unit-test.sh "${subcommand_opts[@]:+${subcommand_opts[@]}}"
 }
 
 
 function run-colima-unit-test() {
     trace "Running unit tests on containers using Colima"
-    ./scripts/run-colima-unit-test.sh "${subcommand_opts[@]:+${subcommand_opts[@]}}"
+    ./scripts/mac_or_linux/run-colima-unit-test.sh "${subcommand_opts[@]:+${subcommand_opts[@]}}"
 }
 
 
 function run-docker-desktop-unit-test() {
     trace "Running unit tests on containers using Docker Desktop"
-    ./scripts/run-docker-desktop-unit-test.sh "${subcommand_opts[@]:+${subcommand_opts[@]}}"
+    ./scripts/mac_or_linux/run-docker-desktop-unit-test.sh "${subcommand_opts[@]:+${subcommand_opts[@]}}"
 }
 
 
 function run-local-integration-test() {
     trace "Running integration tests on local machine"
-    ./scripts/integration-test.sh "${subcommand_opts[@]:+${subcommand_opts[@]}}"
+    ./scripts/mac_or_linux/integration-test.sh "${subcommand_opts[@]:+${subcommand_opts[@]}}"
 }
 
 
 function run-colima-integration-test() {
     trace "Running integration tests on containers using Colima"
-    ./scripts/run-colima-integration-test.sh "${subcommand_opts[@]:+${subcommand_opts[@]}}"
+    ./scripts/mac_or_linux/run-colima-integration-test.sh "${subcommand_opts[@]:+${subcommand_opts[@]}}"
 }
 
 
 function run-docker-desktop-integration-test() {
     trace "Running integration tests on containers using Docker Desktop"
-    ./scripts/run-docker-desktop-integration-test.sh "${subcommand_opts[@]:+${subcommand_opts[@]}}"
+    ./scripts/mac_or_linux/run-docker-desktop-integration-test.sh "${subcommand_opts[@]:+${subcommand_opts[@]}}"
 }
 
 
 function run-local-job() {
     trace "Running job on local machine"
-    ./scripts/run-job.sh "${subcommand_opts[@]:+${subcommand_opts[@]}}"
+    ./scripts/mac_or_linux/run-job.sh "${subcommand_opts[@]:+${subcommand_opts[@]}}"
 }
 
 
 function run-colima-job() {
     trace "Running job on containers using Colima"
-    ./scripts/run-colima-job.sh "${subcommand_opts[@]:+${subcommand_opts[@]}}"
+    ./scripts/mac_or_linux/run-colima-job.sh "${subcommand_opts[@]:+${subcommand_opts[@]}}"
 }
 
 
 function run-docker-desktop-job() {
     trace "Running job on containers using Docker Desktop"
-    ./scripts/run-docker-desktop-job.sh "${subcommand_opts[@]:+${subcommand_opts[@]}}"
+    ./scripts/mac_or_linux/run-docker-desktop-job.sh "${subcommand_opts[@]:+${subcommand_opts[@]}}"
 }
 
 
