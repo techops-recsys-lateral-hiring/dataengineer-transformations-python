@@ -42,12 +42,12 @@ switch ($action)
         }
     run-local-integration-test {
         Write-Host "Running integration tests on local machine"
-        poetry run pytest tests/integration
+        scripts/win/run-local-integration-test.ps1
         Break
         }
     run-docker-desktop-integration-test {
         Write-Host "Running integration tests on containers using Docker Desktop"
-        ./batect integration-test
+        scripts/win/run-docker-desktop-integration-test.ps1
         Break
         }
     run-local-job {
@@ -57,7 +57,7 @@ switch ($action)
         }
     run-docker-desktop-job {
         "Running job on containers using Docker Desktop"
-        ./batect run-job
+        ./scripts/win/run-docker-desktop-job.ps1
         Break
         }
     usage {
