@@ -132,7 +132,7 @@ function usage() {
 
 function linting() {
     trace "Linting"
-    ./scripts/linting.sh "${subcommand_opts[@]:+${subcommand_opts[@]}}"
+    ./scripts/mac_or_linux/linting.sh "${subcommand_opts[@]:+${subcommand_opts[@]}}"
 }
 
 
