@@ -38,6 +38,9 @@ scripts\install.bat
 `./go.sh start-colima`
 
 
+> **Please install poetry if you would like to use lint command. Instructions to install poetry in [README-LOCAL](README-LOCAL.md) **
+
+
 ## List of commands
 
 General pattern apart from installation and starting of Colima is:
@@ -52,8 +55,8 @@ Full list of commands for Mac and Linux users is as follows:
 
 | S.No.      | Command | Action     |
 | :---:        |    :----   |          :--- |
-| 1      | ./go.sh lint       | Static analysis, code style, etc.   |
-| 2      | ./go.sh linting       | Static analysis, code style, etc.   |
+| 1      | ./go.sh lint       | Static analysis, code style, etc. (please install poetry if you would like to use this command)   |
+| 2      | ./go.sh linting       | Static analysis, code style, etc. (please install poetry if you would like to use this command)   |
 | 3      | ./go.sh install-with-docker-desktop       | Install the application requirements along with docker desktop   |
 | 4      | ./go.sh install-with-colima       | Install the application requirements along with colima   |
 | 5      | ./go.sh start-colima       | Start Colima   |
@@ -73,7 +76,7 @@ Full list of commands for Windows users is as follows:
 
 | S.No.      | Command | Action     |
 | :---:        |    :----   |          :--- |
-| 1      | go.ps1 linting       | Static analysis, code style, etc.   |
+| 1      | go.ps1 linting       | Static analysis, code style, etc. (please install poetry if you would like to use this command)  |
 | 2      | go.ps1 install-with-docker-desktop       | Install the application requirements along with docker desktop   |
 | 3      | go.ps1 run-local-unit-test       | Run unit tests on local machine   |
 | 4      | go.ps1 run-docker-desktop-unit-test       | Run unit tests on containers using Docker Desktop   |

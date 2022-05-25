@@ -112,7 +112,7 @@ fi
 function usage() {
     trace "$0 <command> [--] [options ...]"
     trace "Commands:"
-    trace "    linting   Static analysis, code style, etc."
+    trace "    linting   Static analysis, code style, etc.(please install poetry if you would like to use this command)"
     trace "    precommit Run sensible checks before committing"
     trace "    install-with-docker-desktop       Install the application requirements along with docker desktop"
     trace "    install-with-colima       Install the application requirements along with colima"

@@ -5,7 +5,7 @@ $action=$args[0]
 function Get-Usage {
     Write-Host $MyInvocation.PSCommandPath " <command> [--] [options ...]"
     Write-Host "Commands:"
-    Write-Host "    linting   Static analysis, code style, etc."
+    Write-Host "    linting   Static analysis, code style, etc. (please install poetry if you would like to use this command)"
     Write-Host "    precommit Run sensible checks before committing"
     Write-Host "    install-with-docker-desktop       Install the application requirements along with docker desktop"
     Write-Host "    run-local-unit-test     Run unit tests on local machine"
