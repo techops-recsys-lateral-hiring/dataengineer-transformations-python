@@ -13,8 +13,10 @@ If docker desktop can't be installed then Colima could be used on Mac and Linux.
 otherwise local laptop should be set up.**
 
 Please make sure you have the following installed and can run them
+
 * Docker Desktop or Colima
 * Java (11)
+
 
 You could use following instructions as guidelines to install Docker or Colima and Java.
 
