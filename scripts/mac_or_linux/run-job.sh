@@ -35,3 +35,4 @@ poetry run spark-submit \
     $JOB_ENTRY_POINT \
     $INPUT_FILE_PATH \
     $OUTPUT_PATH
+
