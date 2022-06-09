@@ -122,7 +122,8 @@ JOB=wordcount ./go.sh run-docker-desktop-job
 #### Run the job using Docker Desktop on Windows
 
 ```bash
-JOB=wordcount go.ps1 run-docker-desktop-job 
+$env:JOB = wordcount 
+.\go.ps1 run-docker-desktop-job 
 ```
 
 #### Run the job using Colima
@@ -168,7 +169,8 @@ JOB=citibike_ingest ./go.sh run-docker-desktop-job
 ##### Run the job using Docker Desktop on Windows
 
 ```bash
-JOB=citibike_ingest go.ps1 run-docker-desktop-job
+$env:JOB = citibike_ingest
+.\go.ps1 run-docker-desktop-job
 ```
 
 ##### Run the job using Colima
@@ -211,7 +213,8 @@ JOB=citibike_distance_calculation ./go.sh run-docker-desktop-job
 ##### Run the job using Docker Desktop on Windows
 
 ```bash
-JOB=citibike_distance_calculation go.ps1 run-docker-desktop-job
+$env:JOB = citibike_distance_calculation 
+.\go.ps1 run-docker-desktop-job
 ```
 
 ##### Run the job using Colima
