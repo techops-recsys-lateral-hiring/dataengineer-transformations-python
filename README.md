@@ -135,7 +135,9 @@ JOB=wordcount ./go.sh run-colima-job
 ```
 
 ### Citibike
-For analytics purposes the BI department of a bike share company would like to present dashboards, displaying the
+***This problem uses data made publically available by [Citibike](https://citibikenyc.com/), a New York based bike share company.***
+
+For analytics purposes, the BI department of a hypothetical bike share company would like to present dashboards, displaying the
 distance each bike was driven. There is a `*.csv` file that contains historical data of previous bike rides. This input
 file needs to be processed in multiple steps. There is a pipeline running these jobs.
 
