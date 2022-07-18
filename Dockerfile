@@ -1,5 +1,5 @@
-ARG PYTHON_VERSION=3.9.4
-FROM python:$PYTHON_VERSION
+ARG PYTHON_VERSION=3.9.10
+FROM --platform=linux/amd64 python:$PYTHON_VERSION
 USER root
 WORKDIR /opt
 RUN wget https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.11%2B9/OpenJDK11U-jdk_x64_linux_hotspot_11.0.11_9.tar.gz && \
@@ -12,6 +12,7 @@ ENV PATH="/opt/jdk-11.0.11+9/bin:/opt/scala-2.13.5/bin:/opt/spark-3.2.1-bin-hado
 
 RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
 ENV PATH="/root/.poetry/bin:${PATH}"
+RUN poetry config virtualenvs.in-project false
 
 #TODO : Change the user to non root user
 #USER 185

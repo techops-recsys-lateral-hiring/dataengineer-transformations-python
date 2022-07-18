@@ -81,6 +81,7 @@ dmypy.json
 .pytype/
 cython_debug/
 .idea
+.vscode
 *.iml
 requirements.txt
 .python-version
