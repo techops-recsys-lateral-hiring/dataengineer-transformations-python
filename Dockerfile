@@ -10,8 +10,8 @@ RUN tar xzf OpenJDK11U-jdk_x64_linux_hotspot_11.0.11_9.tar.gz && \
     tar xvf spark-3.2.1-bin-hadoop3.2.tgz
 ENV PATH="/opt/jdk-11.0.11+9/bin:/opt/scala-2.13.5/bin:/opt/spark-3.2.1-bin-hadoop3.2/bin:$PATH"
 
-RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
-ENV PATH="/root/.poetry/bin:${PATH}"
+RUN curl -sSL https://install.python-poetry.org | python3 -
+ENV PATH="/root/.local/bin:${PATH}"
 RUN poetry config virtualenvs.in-project false
 
 #TODO : Change the user to non root user
