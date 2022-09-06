@@ -229,3 +229,10 @@ JOB=citibike_distance_calculation ./go.sh run-colima-job
 ## Running the code outside container
 
 If you would like to run the code in your laptop locally without containers then please follow instructions [here](README-LOCAL.md).
+
+## Running the code on Gitpod
+Alternatively, you can setup the environment using [**Gitpod**](https://gitpod.io/)
+
+It's recommend that you setup ssh to Gitpod so that you can use VS Code from local to remote to Gitpod. 
+
+There's an initialize script setup that takes around 3 minutes to complete. Once you use paste this repository link in new Workspace, please wait until the packages are installed.
