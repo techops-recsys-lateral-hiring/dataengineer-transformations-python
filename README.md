@@ -243,8 +243,8 @@ If Testing tab complains about Python Interpreter, run `poetry shell` in termina
 
 If poetry shell activate with this path
 
-`/workspace/.pyenv_mirror/poetry/virtualenvs/data-transformations-v6MlGsQI-py3.10/bin/activate`
+`/workspace/.pyenv_mirror/poetry/virtualenvs/{project_name}-py{python_version}/bin/activate`
 
 Paste this into Python Interpreter prompt
 
-`/workspace/.pyenv_mirror/poetry/virtualenvs/data-transformations-v6MlGsQI-py3.10/bin/python3`
+`/workspace/.pyenv_mirror/poetry/virtualenvs/{project_name}-py{python_version}/bin/python3`
