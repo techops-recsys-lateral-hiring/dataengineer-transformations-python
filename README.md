@@ -14,19 +14,15 @@ poetry install
 ```
 
 ## Run tests
-To run all tests:
-```bash
-make tests
-```
 
 ### Run unit tests
 ```bash
-make unit-test
+./go.sh run-local-unit-test
 ```
 
 ### Run integration tests
 ```bash
-make integration-test
+./go.sh run-local-integration-test
 ```
 
 ## Create package
@@ -49,7 +45,7 @@ More: https://python-poetry.org/docs/cli/#build
 
 ## Run style checks
 ```bash
-make style-checks
+./go.sh linting
 ```
 This is running the linter and a type checker.
 
