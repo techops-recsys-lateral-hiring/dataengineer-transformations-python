@@ -13,17 +13,43 @@ Please make sure you have the following installed and can run them
 poetry install
 ```
 
-## Run tests
+## Mac and Linux users
+### Run tests
 
-### Run unit tests
+#### Run unit tests
 ```bash
-./go.sh run-local-unit-test
+./go.sh run-local-unit-test 
 ```
 
-### Run integration tests
+#### Run integration tests
 ```bash
 ./go.sh run-local-integration-test
 ```
+
+#### Run style checks
+```bash
+./go.sh linting
+```
+This is running the linter and a type checker.
+
+## Windows users
+### Run tests
+
+#### Run unit tests
+```bash
+./go.ps run-local-unit-test 
+```
+
+#### Run integration tests
+```bash
+./go.ps run-local-integration-test
+```
+
+#### Run style checks
+```bash
+./go.ps linting
+```
+This is running the linter and a type checker.
 
 ## Create package
 This will create a `tar.gz` and a `.wheel` in `dist/` folder:
@@ -31,12 +57,6 @@ This will create a `tar.gz` and a `.wheel` in `dist/` folder:
 poetry build
 ```
 More: https://python-poetry.org/docs/cli/#build
-
-## Run style checks
-```bash
-./go.sh linting
-```
-This is running the linter and a type checker.
 
 ## Jobs
 
