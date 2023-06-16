@@ -6,6 +6,7 @@ These jobs are using _PySpark_ to process larger volumes of data and are suppose
 
 We use [`batect`](https://batect.dev/) to dockerise the tasks in this exercise. 
 `batect` is a lightweight wrapper around Docker that helps to ensure tasks run consistently (across linux, mac windows).
+Similarly, `go.sh` / `go.ps` enables commands to be consistent across linux, mac & windows.
 With `batect`, the only dependencies that need to be installed are Docker and Java >=8. Every other dependency is managed inside Docker containers.
 If docker desktop can't be installed then Colima could be used on Mac and Linux. 
 
