@@ -8,6 +8,9 @@ Please make sure you have the following installed and can run them
 * [Poetry](https://python-poetry.org/docs/#installation)
 * Java (1.8)
 
+
+ `go.sh` / `go.ps` enables commands to be consistent across linux, mac & windows.
+
 ## Install all dependencies
 ```bash
 poetry install
