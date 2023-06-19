@@ -11,6 +11,9 @@ Please make sure you have the following installed and can run them
 
  `go.sh` / `go.ps` enables commands to be consistent across linux, mac & windows.
 
+
+ `go.sh` / `go.ps` enables commands to be consistent across linux, mac & windows.
+
 ## Install all dependencies
 ```bash
 poetry install
