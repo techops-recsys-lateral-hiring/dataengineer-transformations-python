@@ -4,7 +4,7 @@
 
 tasks:
   - init: |
-      pyenv install 3.10.6
-      pyenv shell 3.10.6
+      pyenv install 3.11.4
+      pyenv shell 3.11.4
       poetry install
       make tests
