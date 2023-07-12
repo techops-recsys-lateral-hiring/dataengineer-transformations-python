@@ -1,0 +1,55 @@
+name: Local Setup Test
+run-name: ${{ github.actor }} is testing local setup
+on: [push]
+jobs:
+  mac_nix:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          distribution: "zulu"
+          java-version: "11"
+      - name: Install poetry
+        run: pipx install poetry
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+          cache: "poetry"
+      - name: Install Python Dependencies
+        run: |
+          poetry install
+      - name: Run local unit tests
+        run: |
+          ./go.sh run-local-unit-test
+      - name: Run local integration tests
+        run: |
+          ./go.sh run-local-integration-test
+
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          distribution: "zulu"
+          java-version: "11"
+      - name: Install poetry
+        run: pipx install poetry
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+          cache: "poetry"
+      - name: Install Python Dependencies
+        run: |
+          scripts\install.bat
+          poetry install
+      - name: Run local unit tests
+        run: |
+          go.ps1 run-local-unit-test
+      - name: Run local integration tests
+        run: |
+          go.ps1 run-local-integration-test

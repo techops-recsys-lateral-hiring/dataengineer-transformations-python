@@ -1,1 +1,1 @@
-poetry run pytest tests/integration
+poetry run pytest tests/unit
