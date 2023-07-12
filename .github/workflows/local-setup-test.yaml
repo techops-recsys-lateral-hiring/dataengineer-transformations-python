@@ -49,7 +49,7 @@ jobs:
           poetry install
       - name: Run local unit tests
         run: |
-          go.ps1 run-local-unit-test
+          .\go.ps1 run-local-unit-test
       - name: Run local integration tests
         run: |
-          go.ps1 run-local-integration-test
+          .\go.ps1 run-local-integration-test
