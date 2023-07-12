@@ -1,5 +1,4 @@
 name: Local Setup Test
-run-name: ${{ github.actor }} is testing local setup
 on: [push]
 jobs:
   mac_nix:
