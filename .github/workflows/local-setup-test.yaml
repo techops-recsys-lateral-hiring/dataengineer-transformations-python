@@ -42,16 +42,35 @@ jobs:
         with:
           python-version: "3.11"
           cache: "poetry"
+      - name: Install Hadoop for Windows
+        # See https://cwiki.apache.org/confluence/display/HADOOP2/WindowsProblems
+        # that recommends https://github.com/steveloughran/winutils
+        # that recommends https://github.com/cdarlint/winutils
+        #
+        # Setting environement variables: e.g.
+        # $env:HADOOP_HOME = "$pwd\winutils\hadoop-3.3.5"
+        # $env:Path += ";$pwd\winutils\hadoop-3.3.5\bin"
+        # requires a special handling: https://stackoverflow.com/questions/61858388/how-do-i-set-an-enviroment-variable-in-github-action-on-a-windows-server
+        #
+        # Reading / Writing to parquet through winutils requires Microsoft Visual C++ 2010 Service Pack 1
+        # https://stackoverflow.com/questions/45947375/why-does-starting-a-streaming-query-lead-to-exitcodeexception-exitcode-1073741
+        run: |
+          choco install vcredist2010
+          git clone --depth 1 -b master https://github.com/cdarlint/winutils.git
+          echo "HADOOP_HOME=$pwd\winutils\hadoop-3.3.5" >> $env:GITHUB_ENV
+          echo ";$pwd\winutils\hadoop-3.3.5\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+      - name: Test Hadoop Setup
+        run: |
+          winutils.exe chmod 777 D:\a\dataengineer-transformations-python\dataengineer-transformations-python
       - name: Install Python Dependencies
         run: |
           scripts\install.bat
           poetry install
+        env:
+          PYSPARK_HADOOP_VERSION: without
       - name: Run local unit tests
         run: |
           .\go.ps1 run-local-unit-test
-      # This doesn't work at the moment because running spark locally on Windows
-      # requires a special setup for Hadoop
-      # TODO: https://cwiki.apache.org/confluence/display/HADOOP2/WindowsProblems
       - name: Run local integration tests
         run: |
           .\go.ps1 run-local-integration-test
