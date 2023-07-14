@@ -52,6 +52,6 @@ jobs:
       # This doesn't work at the moment because running spark locally on Windows
       # requires a special setup for Hadoop
       # TODO: https://cwiki.apache.org/confluence/display/HADOOP2/WindowsProblems
-      # - name: Run local integration tests
-      #   run: |
-      #     .\go.ps1 run-local-integration-test
+      - name: Run local integration tests
+        run: |
+          .\go.ps1 run-local-integration-test
