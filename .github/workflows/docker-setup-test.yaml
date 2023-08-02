@@ -29,7 +29,7 @@ jobs:
           java-version: "11"
       - name: Run Docker unit tests
         run: |
-          .\go.ps1 run-docker-unit-test
+          .\go.ps1 run-docker-desktop-unit-test
       - name: Run Docker integration tests
         run: |
           .\go.ps1 run-docker-desktop-integration-test
