@@ -57,6 +57,7 @@ Full list of commands for Mac and Linux users is as follows:
 | :---: | :------------------------------------------ | :---------------------------------------------------------------------------------------------- |
 |   1   | ./go.sh lint                                | Static analysis, code style, etc. (please install poetry if you would like to use this command) |
 |   2   | ./go.sh linting                             | Static analysis, code style, etc. (please install poetry if you would like to use this command) |
+|   2   | ./go.sh run-docker-desktop-linting          | Run linting on containers using Docker Desktop                                                  |
 |   3   | ./go.sh install-with-docker-desktop         | Install the application requirements along with docker desktop                                  |
 |   4   | ./go.sh install-with-colima                 | Install the application requirements along with colima                                          |
 |   5   | ./go.sh start-colima                        | Start Colima                                                                                    |
