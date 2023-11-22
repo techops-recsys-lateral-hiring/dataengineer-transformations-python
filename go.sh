@@ -72,6 +72,10 @@ while true; do
         operations+=( run-docker-desktop-integration-test )
         shift
         ;;
+    run-docker-desktop-linting)
+        operations+=( run-docker-desktop-linting )
+        shift
+        ;;        
     run-colima-integration-test)
             operations+=( run-colima-integration-test )
             shift
@@ -113,6 +117,7 @@ function usage() {
     trace "$0 <command> [--] [options ...]"
     trace "Commands:"
     trace "    linting   Static analysis, code style, etc.(please install poetry if you would like to use this command)"
+    trace "    run-docker-desktop-linting   Run linting before using Docker Desktop "    
     trace "    precommit Run sensible checks before committing"
     trace "    install-with-docker-desktop       Install the application requirements along with docker desktop"
     trace "    install-with-colima       Install the application requirements along with colima"
@@ -194,6 +199,11 @@ function run-docker-desktop-integration-test() {
     ./scripts/mac_or_linux/run-docker-desktop-integration-test.sh "${subcommand_opts[@]:+${subcommand_opts[@]}}"
 }
 
+function run-docker-desktop-linting() {
+    trace "Running linting using Docker Desktop"
+    ./scripts/mac_or_linux/run-docker-desktop-linting.sh "${subcommand_opts[@]:+${subcommand_opts[@]}}"
+}
+
 
 function run-local-job() {
     trace "Running job on local machine"
@@ -263,6 +273,10 @@ fi
 if contains run-docker-desktop-job "${operations[@]}"; then
     run-docker-desktop-job
 fi
+if contains run-docker-desktop-linting "${operations[@]}"; then
+    run-docker-desktop-linting
+fi
+
 
 
 trace "Exited cleanly."

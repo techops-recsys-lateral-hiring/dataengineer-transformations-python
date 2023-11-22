@@ -1,5 +1,6 @@
 ARG PYTHON_VERSION=3.9.10
-FROM --platform=linux/amd64 python:$PYTHON_VERSION
+#FROM --platform=linux/amd64 python:$PYTHON_VERSION
+FROM python:$PYTHON_VERSION
 USER root
 WORKDIR /opt
 RUN if [ "$(arch)" = "aarch64" ] ; then ARCHITECTURE="aarch64" ; else ARCHITECTURE="x64"; fi && \
