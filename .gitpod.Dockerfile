@@ -22,4 +22,4 @@ WORKDIR /app
 
 COPY ./pyproject.toml /app/pyproject.toml
 
-RUN pyenv install $PYTHON_VERSION && pyenv global $PYTHON_VERSION && poetry install
+RUN pyenv install 3.9.10 && pyenv global 3.9.10 && poetry install
