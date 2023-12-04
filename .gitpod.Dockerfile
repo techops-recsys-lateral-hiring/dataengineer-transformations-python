@@ -2,7 +2,7 @@ ARG PYTHON_VERSION=3.9.10
 # You could use `gitpod/workspace-full` as well.
 FROM gitpod/workspace-python
 
-USER root
+# USER root
 WORKDIR /opt
 RUN if [ "$(arch)" = "aarch64" ] ; then ARCHITECTURE="aarch64" ; else ARCHITECTURE="x64"; fi && \
     wget -O OpenJDK.tar.gz https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.11%2B9/OpenJDK11U-jdk_${ARCHITECTURE}_linux_hotspot_11.0.11_9.tar.gz && \
@@ -21,4 +21,4 @@ WORKDIR /app
 
 COPY ./pyproject.toml /app/pyproject.toml
 
-RUN pyenv install 3.9.10 && pyenv global 3.9.10 && poetry install
+RUN pyenv install 3.9.10 && pyenv global 3.9.10 && pyenv shell 3.9.10 && poetry install
