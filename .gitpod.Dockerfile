@@ -1,5 +1,10 @@
 ARG PYTHON_VERSION=3.9.10
-FROM --platform=linux/amd64 python:$PYTHON_VERSION
+# You could use `gitpod/workspace-full` as well.
+FROM gitpod/workspace-python
+
+RUN pyenv install $PYTHON_VERSION \
+    && pyenv global $PYTHON_VERSION
+
 USER root
 WORKDIR /opt
 RUN if [ "$(arch)" = "aarch64" ] ; then ARCHITECTURE="aarch64" ; else ARCHITECTURE="x64"; fi && \
