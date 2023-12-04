@@ -14,7 +14,6 @@ RUN tar xzf OpenJDK.tar.gz && \
 ENV PATH="/opt/jdk-11.0.11+9/bin:/opt/scala-2.13.5/bin:/opt/spark-3.2.1-bin-hadoop3.2/bin:$PATH"
 
 ENV PATH="/root/.local/bin:${PATH}"
-RUN poetry config virtualenvs.in-project false
 
 #TODO : Change the user to non root user
 #USER 185
