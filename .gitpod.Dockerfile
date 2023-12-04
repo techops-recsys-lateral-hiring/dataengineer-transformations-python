@@ -2,9 +2,6 @@ ARG PYTHON_VERSION=3.9.10
 # You could use `gitpod/workspace-full` as well.
 FROM gitpod/workspace-python
 
-RUN pyenv install $PYTHON_VERSION \
-    && pyenv global $PYTHON_VERSION
-
 USER root
 WORKDIR /opt
 RUN if [ "$(arch)" = "aarch64" ] ; then ARCHITECTURE="aarch64" ; else ARCHITECTURE="x64"; fi && \
@@ -16,7 +13,6 @@ RUN tar xzf OpenJDK.tar.gz && \
     tar xvf spark-hadoop.tgz
 ENV PATH="/opt/jdk-11.0.11+9/bin:/opt/scala-2.13.5/bin:/opt/spark-3.2.1-bin-hadoop3.2/bin:$PATH"
 
-RUN curl -sSL https://install.python-poetry.org | python3 -
 ENV PATH="/root/.local/bin:${PATH}"
 RUN poetry config virtualenvs.in-project false
 
@@ -26,4 +22,4 @@ WORKDIR /app
 
 COPY ./pyproject.toml /app/pyproject.toml
 
-RUN poetry install
+RUN pyenv install $PYTHON_VERSION && pyenv global $PYTHON_VERSION && poetry install
