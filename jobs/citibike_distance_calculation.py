@@ -3,7 +3,7 @@ import logging
 import sys
 from pyspark.sql import SparkSession
 
-from data_transformations.citibike import distance_transformer
+from distance_transformer import run as distance_transformer_run
 
 LOG_FILENAME = 'project.log'
 APP_NAME = "Citibike Pipeline: Distance Calculation"
