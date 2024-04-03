@@ -283,13 +283,13 @@ dev = ["pre-commit", "tox"]
 
 [[package]]
 name = "py4j"
-version = "0.10.9"
+version = "0.10.9.7"
 description = "Enables Python programs to dynamically access arbitrary Java objects"
 optional = false
 python-versions = "*"
 files = [
-    {file = "py4j-0.10.9-py2.py3-none-any.whl", hash = "sha256:859ba728a7bb43e9c2bf058832759fb97a598bb28cc12f34f5fc4abdec08ede6"},
-    {file = "py4j-0.10.9.tar.gz", hash = "sha256:36ec57f43ff8ced260a18aa9a4e46c3500a730cac8860e259cbaa546c2b9db2f"},
+    {file = "py4j-0.10.9.7-py2.py3-none-any.whl", hash = "sha256:85defdfd2b2376eb3abf5ca6474b51ab7e0de341c75a02f46dc9b5976f5a5c1b"},
+    {file = "py4j-0.10.9.7.tar.gz", hash = "sha256:0b6e5315bb3ada5cf62ac651d107bb2ebc02def3dee9d9548e3baac644ea8dbb"},
 ]
 
 [[package]]
@@ -372,21 +372,23 @@ files = [
 
 [[package]]
 name = "pyspark"
-version = "3.1.2"
+version = "3.5.1"
 description = "Apache Spark Python API"
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.8"
 files = [
-    {file = "pyspark-3.1.2.tar.gz", hash = "sha256:5e25ebb18756e9715f4d26848cc7e558035025da74b4fc325a0ebc05ff538e65"},
+    {file = "pyspark-3.5.1.tar.gz", hash = "sha256:dd6569e547365eadc4f887bf57f153e4d582a68c4b490de475d55b9981664910"},
 ]
 
 [package.dependencies]
-py4j = "0.10.9"
+py4j = "0.10.9.7"
 
 [package.extras]
-ml = ["numpy (>=1.7)"]
-mllib = ["numpy (>=1.7)"]
-sql = ["pandas (>=0.23.2)", "pyarrow (>=1.0.0)"]
+connect = ["googleapis-common-protos (>=1.56.4)", "grpcio (>=1.56.0)", "grpcio-status (>=1.56.0)", "numpy (>=1.15)", "pandas (>=1.0.5)", "pyarrow (>=4.0.0)"]
+ml = ["numpy (>=1.15)"]
+mllib = ["numpy (>=1.15)"]
+pandas-on-spark = ["numpy (>=1.15)", "pandas (>=1.0.5)", "pyarrow (>=4.0.0)"]
+sql = ["numpy (>=1.15)", "pandas (>=1.0.5)", "pyarrow (>=4.0.0)"]
 
 [[package]]
 name = "pytest"
@@ -496,4 +498,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "155ba44d442047c46503053c7ccefc8b662672360d3bea3d2e30c3a2b81df340"
+content-hash = "60c5102c60406495669b5b21b7050f33f0b4cd67a58cac0f3730db88d78e1a64"
