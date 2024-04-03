@@ -6,15 +6,15 @@ authors = ["ThoughtWorks <info@thoughtworks.com>"]
 license = "Apache-License-2.0"
 
 [tool.poetry.dependencies]
-numpy = "^1.20.2"
-pandas = "^1.2.4"
-pyarrow = "^8.0.0"
+numpy = "^1.26.4"
+pandas = "^1.5.3"
+pyarrow = "^15.0.0"
 pyspark = "^3.1.1"
-python = "^3.9"
+pytest = "^6.2.4"
+python = "^3.11"
 
 [tool.poetry.dev-dependencies]
 pylint = "^2.8.2"
-pytest = "^6.2.4"
 mypy = "^0.910"
 
 [build-system]
