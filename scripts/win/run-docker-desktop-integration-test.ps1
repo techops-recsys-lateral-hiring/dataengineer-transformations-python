@@ -1,1 +1,0 @@
-./batect integration-test
