@@ -3,12 +3,13 @@
 # and commit this file to your remote git repository to share the goodness with others.
 
 image:
-    file: .gitpod.Dockerfile
+  file: .gitpod.Dockerfile
 
 tasks:
   - init: |
-      pyenv shell 3.9.10
-      poetry env use "${HOME}/.pyenv/versions/3.9.10/bin/python3"
+      pyenv install 3.11.4
+      pyenv shell 3.11.4
+      poetry env use "${HOME}/.pyenv/versions/3.11.4/bin/python3"
       poetry install
       poetry env info
       make tests
