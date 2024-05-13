@@ -3,20 +3,10 @@ This is a collection of _Python_ jobs that are supposed to transform data.
 These jobs are using _PySpark_ to process larger volumes of data and are supposed to run on a _Spark_ cluster (via `spark-submit`).
 
 ## Pre-requisites
-
-We use [`batect`](https://batect.dev/) to dockerise the tasks in this exercise. 
-`batect` is a lightweight wrapper around Docker that helps to ensure tasks run consistently (across linux, mac windows).
-With `batect`, the only dependencies that need to be installed are Docker and Java >=8. Every other dependency is managed inside Docker containers.
-If docker desktop can't be installed then Colima could be used on Mac and Linux. 
-
-> **For Windows, docker desktop is the only option for using container to run application
-otherwise local laptop should be set up.**
-
 Please make sure you have the following installed and can run them
 * Python (3.9 or later), you can use for example [pyenv](https://github.com/pyenv/pyenv#installation) to manage your python versions locally
 * [Poetry](https://python-poetry.org/docs/#installation)
-* Docker Desktop or Colima
-* Java(11)
+* Java (1.8)
 
 ## Install all dependencies
 ```bash
