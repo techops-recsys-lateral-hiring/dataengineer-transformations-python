@@ -6,13 +6,7 @@ These jobs are using _PySpark_ to process larger volumes of data and are suppose
 Please make sure you have the following installed and can run them
 * Python (3.9 or later), you can use for example [pyenv](https://github.com/pyenv/pyenv#installation) to manage your python versions locally
 * [Poetry](https://python-poetry.org/docs/#installation)
-* Java (1.8)
-
-
- `go.sh` / `go.ps` enables commands to be consistent across linux, mac & windows.
-
-
- `go.sh` / `go.ps` enables commands to be consistent across linux, mac & windows.
+* Java (11)
 
 ## Install all dependencies
 ```bash
