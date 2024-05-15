@@ -13,41 +13,25 @@ Please make sure you have the following installed and can run them
 poetry install
 ```
 
-## Mac and Linux users
+## Setup
 ### Run tests
 
 #### Run unit tests
 ```bash
-./go.sh run-local-unit-test 
+poetry run pytest tests/unit
 ```
 
 #### Run integration tests
 ```bash
-./go.sh run-local-integration-test
+poetry run pytest tests/integration
 ```
 
 #### Run style checks
 ```bash
-./go.sh linting
-```
-This is running the linter and a type checker.
+poetry run mypy --ignore-missing-imports --disallow-untyped-calls --disallow-untyped-defs --disallow-incomplete-defs \
+            data_transformations tests
 
-## Windows users
-### Run tests
-
-#### Run unit tests
-```bash
-./go.ps run-local-unit-test 
-```
-
-#### Run integration tests
-```bash
-./go.ps run-local-integration-test
-```
-
-#### Run style checks
-```bash
-./go.ps linting
+poetry run pylint data_transformations tests
 ```
 This is running the linter and a type checker.
 
