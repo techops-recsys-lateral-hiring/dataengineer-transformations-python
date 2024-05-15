@@ -1,18 +1,19 @@
 import logging
-
 import sys
 from pyspark.sql import SparkSession
-
+import data_transformations.wordcount
 from data_transformations.wordcount import word_count_transformer
 
-LOG_FILENAME = 'project.log'
-APP_NAME = "WordCount"
+
 
 if __name__ == '__main__':
-    logging.basicConfig(filename=LOG_FILENAME, level=logging.INFO)
+    LOG_FILENAME = 'project.log'
+    APP_NAME = "WordCount"
+    logging.basicConfig(filename=LOG_FILENAME, level=logging.DEBUG)
     logging.info(sys.argv)
-
-    if len(sys.argv) is not 3:
+    print(sys.argv)
+    if len(sys.argv) == 0:
+        print('Error +++++++++')
         logging.warning("Input .txt file and output path are required")
         sys.exit(1)
 
