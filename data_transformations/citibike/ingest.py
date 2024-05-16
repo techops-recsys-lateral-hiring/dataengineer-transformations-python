@@ -1,6 +1,6 @@
 import logging
 from typing import List
-
+import data_transformations.citibike.distance_transformer as bike_distance
 from pyspark.sql import SparkSession
 
 
@@ -8,12 +8,9 @@ def sanitize_columns(columns: List[str]) -> List[str]:
     return [column.replace(" ", "_") for column in columns]
 
 
-def run(spark: SparkSession, ingest_path: str, transformation_path: str) -> None:
-    logging.info("Reading text file from: %s", ingest_path)
-    input_df = spark.read.format("org.apache.spark.csv").option("header", True).csv(ingest_path)
-    renamed_columns = sanitize_columns(input_df.columns)
-    ref_df = input_df.toDF(*renamed_columns)
-    ref_df.printSchema()
-    ref_df.show()
-
-    ref_df.write.parquet(transformation_path)
+def run(spark, ingestPath, transformationPath):
+    df = spark.read.parquet(ingestPath)
+    df.show()
+    df = bike_distance.computeDistances(spark, df)
+    df.show()
+    df.write.parquet(transformationPath,mode='append')

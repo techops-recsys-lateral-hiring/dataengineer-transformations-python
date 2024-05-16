@@ -1,26 +1,28 @@
 import os
 import tempfile
 from typing import Tuple, List
-
+import pandas as pd
 import pytest
 
 from data_transformations.wordcount import word_count_transformer
 from tests.integration import SPARK
 
 
-def _get_file_paths(input_file_lines: List[str]) -> Tuple[str, str]:
-    base_path = tempfile.mkdtemp()
-
+def _get_file_paths(input_file_lines: list[str]) :#-> Tuple[str, str]:
+    base_path = ".\pytest_output"
+    print('base_path = ',base_path)
     input_text_path = "%s%sinput.txt" % (base_path, os.path.sep)
+    print('input_text_path = ',input_text_path)
+
     with open(input_text_path, 'w') as input_file:
         input_file.writelines(input_file_lines)
-
-    output_path = "%s%soutput" % (base_path, os.path.sep)
+    output_path = "%s" % (base_path)
+    print('output_path = ', output_path)
     return input_text_path, output_path
 
-
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_should_tokenize_words_and_count_them() -> None:
+    print('Hi')
     lines = [
         "In my younger and more vulnerable years my father gave me some advice that I've been "
         "turning over in my mind ever since. \"Whenever you feel like criticising any one,\""
@@ -46,10 +48,13 @@ def test_should_tokenize_words_and_count_them() -> None:
         "So we beat on, boats against the current, borne back ceaselessly into the past.      "
     ]
     input_file_path, output_path = _get_file_paths(lines)
-
+    print('input_file_path = ', input_file_path, '  output_path = ',output_path)
     word_count_transformer.run(SPARK, input_file_path, output_path)
+    output_path = "%s%soutput.csv" % (output_path, os.path.sep)
+    pandas_df = pd.read_csv(output_path,sep='|')
+    #actual = SPARK.createDataFrame(pandas_df)
 
-    actual = SPARK.read.csv(output_path, header=True, inferSchema=True)
+    #actual = SPARK.read.csv(output_path, header=True, inferSchema=True)
     expected_data = [
         ["a", 4],
         ["across", 1],
@@ -259,6 +264,8 @@ def test_should_tokenize_words_and_count_them() -> None:
         ["you've", 1],
         ["younger", 1],
     ]
-    expected = SPARK.createDataFrame(expected_data, ["word", "count"])
+    spark_df = SPARK.createDataFrame(expected_data, ["line", "word_count"])
+    #expected = spark_df.toPandas()
+    print(pandas_df[["line", "word_count"]], '                ',spark_df.select("line", "word_count"))
 
-    assert actual.collect() == expected.collect()
+    assert pandas_df[["line", "word_count"]] == spark_df.select("line", "word_count")

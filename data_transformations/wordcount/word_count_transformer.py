@@ -20,7 +20,7 @@ def run(spark: SparkSession, input_path: str, output_path: str) -> None:
     df_pandas.to_csv(os.path.join(output_path,'output.csv'),sep= '|', index=False)
 
     # try:
-    #     input_df.coalesce(1).write.option("header","true").mode("overwrite").format("csv").save("output_path")
-    #     count_of_words_df.write.format("csv").mode("overwrite").save(output_path+'/file.csv')
+    #     count_of_words_df.coalesce(1).write.option("header","true").mode("overwrite").format("csv").save(output_path)
+    #     #count_of_words_df.write.format("csv").mode("overwrite").save(output_path+'/file.csv')
     # except Exception as e:
     #      print('Error due to : ',e)
