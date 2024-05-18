@@ -5,7 +5,7 @@ WORKDIR /opt
 RUN if [ "$(arch)" = "aarch64" ] ; then ARCHITECTURE="aarch64" ; else ARCHITECTURE="x64"; fi && \
     wget -O OpenJDK.tar.gz https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.11%2B9/OpenJDK11U-jdk_${ARCHITECTURE}_linux_hotspot_11.0.11_9.tar.gz && \
     wget -O scala.tgz https://downloads.lightbend.com/scala/2.13.5/scala-2.13.5.tgz && \
-    wget -O spark-hadoop.tgz https://archive.apache.org/dist/spark/spark-3.4.1/spark-3.4.1-bin-hadoop3-scala2.13.tgz
+    wget -O spark-hadoop.tgz https://archive.apache.org/dist/spark/spark-3.4.3/spark-3.4.3-bin-hadoop3-scala2.13.tgz
 RUN tar xzf OpenJDK.tar.gz && \
     tar xvf scala.tgz && \
     tar xvf spark-hadoop.tgz
