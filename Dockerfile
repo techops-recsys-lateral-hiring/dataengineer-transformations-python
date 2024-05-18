@@ -9,7 +9,7 @@ RUN if [ "$(arch)" = "aarch64" ] ; then ARCHITECTURE="aarch64" ; else ARCHITECTU
 RUN tar xzf OpenJDK.tar.gz && \
     tar xvf scala.tgz && \
     tar xvf spark-hadoop.tgz
-ENV PATH="/opt/jdk-11.0.11+9/bin:/opt/scala-2.13.5/bin:/opt/spark-3.2.1-bin-hadoop3.2/bin:$PATH"
+ENV PATH="/opt/jdk-11.0.11+9/bin:/opt/scala-2.13.5/bin:/opt/spark-3.4.3-bin-hadoop3/bin:$PATH"
 
 RUN curl -sSL https://install.python-poetry.org | python3 -
 ENV PATH="/root/.local/bin:${PATH}"
