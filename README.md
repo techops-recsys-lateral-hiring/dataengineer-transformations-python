@@ -32,7 +32,7 @@ OR
 scripts\install_choco.ps1
 scripts\install.bat
 
-# For local laptop setup ensure that Java 11 with Spark 3.4.3 is available. More details in README-LOCAL.md
+# For local laptop setup ensure that Java 11 with Spark 3.5.1 is available. More details in README-LOCAL.md
 ```
 
 > **If you are using Colima, please ensure that you start Colima. For staring Colima, you could use following command:**
