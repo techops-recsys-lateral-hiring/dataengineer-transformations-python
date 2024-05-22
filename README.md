@@ -49,7 +49,7 @@ OR
 scripts\install_choco.ps1
 scripts\install.bat
 
-# For local laptop setup ensure that Java 11 with Spark 3.2.1 is available. More details in README-LOCAL.md
+# For local laptop setup ensure that Java 11 with Spark 3.5.1 is available. More details in README-LOCAL.md
 ```
 More: https://python-poetry.org/docs/cli/#build
 
