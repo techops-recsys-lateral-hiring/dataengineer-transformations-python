@@ -4,7 +4,7 @@ These jobs are using _PySpark_ to process larger volumes of data and are suppose
 
 ## Pre-requisites
 Please make sure you have the following installed and can run them
-* Python (3.9 or later), you can use for example [pyenv](https://github.com/pyenv/pyenv#installation) to manage your python versions locally
+* Python (3.11 or later), you can use for example [pyenv](https://github.com/pyenv/pyenv#installation) to manage your python versions locally
 * [Poetry](https://python-poetry.org/docs/#installation)
 * Java (11)
 
