@@ -11,8 +11,8 @@ pandas = "^2.0.0"
 pyarrow = "^12.0.0"
 # This is pinned to stay in sync with the version
 # That gets downloaded in `Dockerfile`
-pyspark = "3.4.1"
-python = "^3.11.0"
+pyspark = "3.5.1"
+python = "~3.11"
 
 [tool.poetry.dev-dependencies]
 pylint = "^2.8.2"
