@@ -35,7 +35,7 @@ poetry run pylint data_transformations tests
 ```
 This is running the linter and a type checker.
 
-## Create package
+## Create package (optional)
 This will create a `tar.gz` and a `.wheel` in `dist/` folder:
 ```bash
 # Install pre-requisites needed by batect
@@ -52,6 +52,10 @@ scripts\install.bat
 # For local laptop setup ensure that Java 11 with Spark 3.5.1 is available. More details in README-LOCAL.md
 ```
 More: https://python-poetry.org/docs/cli/#build
+
+---
+# STOP HERE: Do not code before the interview begins.
+---
 
 ## Jobs
 
