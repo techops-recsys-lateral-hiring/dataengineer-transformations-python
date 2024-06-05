@@ -55,6 +55,18 @@ More: https://python-poetry.org/docs/cli/#build
 
 ---
 # STOP HERE: Do not code before the interview begins.
+
+
+## Gearing Up for the Pairing Session
+
+Please be sure to complete the below tasks before the pairing session:
+
+1. Get a high-level understanding of the code and test dataset structure
+2. Have your preferred text editor or IDE setup and ready to go. 
+3. Have your coding environment ready by installing Python and Poetry.
+4. Ensure that you are able to run all commands mentioned in this README (note that a failing test from pytest is expected).
+
+**Please note that you DO NOT have to complete the code/tasks inside the `src/` folder. These are intended to be completed collaboratively during the pairing session.**
 ---
 
 ## Jobs
@@ -206,3 +218,5 @@ If poetry shell activate with this path
 Paste this into Python Interpreter prompt
 
 `/workspace/.pyenv_mirror/poetry/virtualenvs/{project_name}-py{python_version}/bin/python3`
+
+
