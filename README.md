@@ -4,9 +4,10 @@ These jobs are using _PySpark_ to process larger volumes of data and are suppose
 
 ## Pre-requisites
 Please make sure you have the following installed and can run them
-* Python (3.11 or later), you can use for example [pyenv](https://github.com/pyenv/pyenv#installation) to manage your python versions locally
+* Python (3.11.x), you can use for example [pyenv](https://github.com/pyenv/pyenv#installation) to manage your python versions locally
 * [Poetry](https://python-poetry.org/docs/#installation)
 * Java (11)
+  * To run pySpark, it's important that the environment variable `JAVA_HOME` is set correctly, check via `echo $JAVA_HOME`
 
 ## Install all dependencies
 ```bash
@@ -49,7 +50,7 @@ OR
 scripts\install_choco.ps1
 scripts\install.bat
 
-# For local laptop setup ensure that Java 11 with Spark 3.5.1 is available. More details in README-LOCAL.md
+# For local laptop setup ensure that Java 11 with Spark 3.5.1 is available.
 ```
 More: https://python-poetry.org/docs/cli/#build
 
