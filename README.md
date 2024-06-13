@@ -8,6 +8,7 @@ Please make sure you have the following installed and can run them
 * [Poetry](https://python-poetry.org/docs/#installation)
 * Java (11)
   * To run pySpark, it's important that the environment variable `JAVA_HOME` is set correctly, check via `echo $JAVA_HOME`
+  * [test_validate_spark_environment.py](/tests/integration/test_validate_spark_environment.py) will help you figure out if your environment will work
 
 ## Install all dependencies
 ```bash
