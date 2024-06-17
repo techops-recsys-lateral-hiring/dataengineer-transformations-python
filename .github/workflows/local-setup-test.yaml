@@ -65,7 +65,6 @@ jobs:
           winutils.exe chmod 777 D:\a\dataengineer-transformations-python\dataengineer-transformations-python
       - name: Install Python Dependencies
         run: |
-          scripts\install.bat
           poetry install
       - name: Run local unit tests
         run: |
