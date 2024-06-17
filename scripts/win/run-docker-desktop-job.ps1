@@ -1,1 +1,0 @@
-./batect run-job

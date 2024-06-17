@@ -1,83 +1,160 @@
 # Data transformations with Python
-This is a collection of _Python_ jobs that are supposed to transform data.
+
+This coding challenge is a collection of _Python_ jobs that are supposed to extract, transform and load data.
 These jobs are using _PySpark_ to process larger volumes of data and are supposed to run on a _Spark_ cluster (via `spark-submit`).
 
-## Pre-requisites
-Please make sure you have the following installed and can run them
-* Python (3.11.x), you can use for example [pyenv](https://github.com/pyenv/pyenv#installation) to manage your python versions locally
-* [Poetry](https://python-poetry.org/docs/#installation)
-* Java (11)
-  * To run pySpark, it's important that the environment variable `JAVA_HOME` is set correctly, check via `echo $JAVA_HOME`
-  * [test_validate_spark_environment.py](/tests/integration/test_validate_spark_environment.py) will help you figure out if your environment will work
+## Before the interview
 
-## Install all dependencies
+**✅ Goals**
+
+- **Get a working environment**  
+  Either local ([local](#local-setup), or using gitpod)
+- **Get an overview of the codebase and technologies involved**
+
+**❌ Non-Goals**
+
+- solving the exercises / writing code
+  > The exercises will be given at the time of interview, and solved by pairing with the interviewer.
+
+<!---
+TODO : Add a link to a spark Tutorial
+---->
+
+### Local Setup
+
+> 💡 If you don't manage to run the local setup, use the [gitpod](#gitpod-setup) one
+
+#### Pre-requisites
+
+Please make sure you have the following installed and can run them
+
+- Python (3.11.X),  
+  you can use for example [pyenv](https://github.com/pyenv/pyenv#installation) to manage your python versions locally
+- [Poetry](https://python-poetry.org/docs/#installation)
+- Java (11), you can use [sdkman](https://sdkman.io/) to install and manage java locally
+
+#### Windows users
+
+We recommend using WSL 2 on Windows for this exercise, due to the [lack of support](https://cwiki.apache.org/confluence/display/HADOOP2/WindowsProblems) of windows paths from Hadoop/Spark.
+
+Follow instructions on the [Windows official page](https://learn.microsoft.com/en-us/windows/wsl/setup/environment)
+
+> 💡 In case of issues, like missing permissions on the machine, please use the [gitpod setup](#gitpod-setup)
+
+#### Install all dependencies
+
 ```bash
 poetry install
 ```
 
-## Setup
-### Run tests
+### Gitpod setup
+
+Alternatively, you can setup the environment using
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/techops-recsys-lateral-hiring/dataengineer-transformations-python)
+
+There's an initialize script setup that takes around 3 minutes to complete. Once you use paste this repository link in new Workspace, please wait until the packages are installed. After everything is setup, select Poetry's environment by clicking on thumbs up icon and navigate to Testing tab and hit refresh icon to discover tests.
+
+Note that you can use gitpod's web interface or setup [ssh to Gitpod](https://www.gitpod.io/docs/references/ides-and-editors/vscode#connecting-to-vs-code-desktop) so that you can use VS Code from local to remote to Gitpod
+
+Remember to stop the vm and restart it just before the interview.
+
+### Verify setup
+
+The following commands should be running successfully
 
 #### Run unit tests
+
 ```bash
 poetry run pytest tests/unit
 ```
 
 #### Run integration tests
+
 ```bash
 poetry run pytest tests/integration
 ```
 
 #### Run style checks
+
 ```bash
 poetry run mypy --ignore-missing-imports --disallow-untyped-calls --disallow-untyped-defs --disallow-incomplete-defs \
             data_transformations tests
 
 poetry run pylint data_transformations tests
 ```
-This is running the linter and a type checker.
 
-## Create package (optional)
-This will create a `tar.gz` and a `.wheel` in `dist/` folder:
-```bash
-# Install pre-requisites needed by batect
-# For mac users:
-./go.sh install-with-docker-desktop
-OR
-./go.sh install-with-colima
+### Anything else?
 
-# For windows/linux users:
-# Please ensure Docker and java >=8 is installed
-scripts\install_choco.ps1
-scripts\install.bat
+You are good to go!
 
-# For local laptop setup ensure that Java 11 with Spark 3.5.1 is available.
-```
-More: https://python-poetry.org/docs/cli/#build
+> ⚠️ do not try to solve the exercises ahead of the interview
 
----
-# STOP HERE: Do not code before the interview begins.
----
+You are allowed to customize your environment (having the test in vscode directly for example): feel free to spend the time making this comfortable for you. This is not an expectation.
 
 ## Jobs
 
-There are two applications in this repo: Word Count, and Citibike.
+There are two exercises in this repo: Word Count, and Citibike.
 
 Currently, these exist as skeletons, and have some initial test cases which are defined but ignored.
-For each application, please un-ignore the tests and implement the missing logic.
+
+The following section provides context over them.
+
+> ⚠️ do not try to solve the exercises ahead of the interview
+
+### Code walk
+
+```
+
+/
+├─ /data_transformations # Contains the main python library
+│ # with the code to the transformations
+│
+├─ /jobs # Contains the entry points to the jobs
+│ # performs argument parsing, and are
+│ # passed to `spark-submit`
+│
+├─ /resources # Contains the raw datasets for the jobs
+│
+├─ /tests
+│ ├─ /units # contains basic unit tests for the code
+│ └─ /integration # contains integrations tests for the jobs
+│ # and the setup
+│
+├─ .gitignore
+├─ .gitpod\* # required for the gitpod setup
+├─ .pylintrc # configuration for pylint
+├─ LICENCE
+├─ poetry.lock
+├─ pyproject.toml
+└─ README.md # The current file
+
+```
 
 ### Word Count
+
 A NLP model is dependent on a specific input file. This job is supposed to preprocess a given text file to produce this
 input file for the NLP model (feature engineering). This job will count the occurrences of a word within the given text
-file (corpus). 
+file (corpus).
 
 There is a dump of the datalake for this under `resources/word_count/words.txt` with a text file.
 
+```mermaid
+---
+title: Citibike Pipeline
+---
+flowchart LR
+  Raw["fa:fa-file words.txt"] -->  J1{{word_count.py}} --> Bronze["fa:fa-file-csv word_count.csv"]
+```
+
 #### Input
+
 Simple `*.txt` file containing text.
 
 #### Output
+
 A single `*.csv` file containing data similar to:
+
 ```csv
 "word","count"
 "a","3"
@@ -86,9 +163,9 @@ A single `*.csv` file containing data similar to:
 ```
 
 #### Run the job
-Please make sure to package the code before submitting the spark job (`poetry build`)
+
 ```bash
-poetry run spark-submit \
+poetry build && poetry run spark-submit \
     --master local \
     --py-files dist/data_transformations-*.whl \
     jobs/word_count.py \
@@ -104,7 +181,13 @@ For analytics purposes, the BI department of a hypothetical bike share company w
 distance each bike was driven. There is a `*.csv` file that contains historical data of previous bike rides. This input
 file needs to be processed in multiple steps. There is a pipeline running these jobs.
 
-![citibike pipeline](docs/citibike.png)
+```mermaid
+---
+title: Citibike Pipeline
+---
+flowchart TD
+  Raw["fa:fa-file-csv citibike.csv"] -->  J1{{citibike_ingest.py}} --> Bronze["fa:fa-table-columns citibike.parquet"] --> J2{{citibike_distance_calculation.py}} --> Silver["fa:fa-table-columns citibike_distance.parquet"]
+```
 
 There is a dump of the datalake for this under `resources/citibike/citibike.csv` with historical data.
 
@@ -133,9 +216,9 @@ Historical bike ride `*.csv` file:
 ```
 
 ##### Run the job
-Please make sure to package the code before submitting the spark job (`poetry build`)
+
 ```bash
-poetry run spark-submit \
+poetry build && poetry run spark-submit \
     --master local \
     --py-files dist/data_transformations-*.whl \
     jobs/citibike_ingest.py \
@@ -145,7 +228,7 @@ poetry run spark-submit \
 
 #### Distance calculation
 
-This job takes bike trip information and calculates the "as the crow flies" distance traveled for each trip.
+This job takes bike trip information and adds the "as the crow flies" distance traveled for each trip.
 It reads the previously ingested data parquet files.
 
 Hint:
@@ -173,9 +256,9 @@ Historical bike ride `*.parquet` files
 ```
 
 ##### Run the job
-Please make sure to package the code before submitting the spark job (`poetry build`)
+
 ```bash
-poetry run spark-submit \
+poetry build && poetry run spark-submit \
     --master local \
     --py-files dist/data_transformations-*.whl \
     jobs/citibike_distance_calculation.py \
@@ -183,28 +266,8 @@ poetry run spark-submit \
     <OUTPUT_PATH>
 ```
 
-## Running the code inside container
+---
 
-If you would like to run the code in Docker, please follow instructions [here](README-DOCKER.md).
+> ⚠️ do not try to solve the exercises ahead of the interview
 
-## Running the code on Gitpod
-
-Alternatively, you can setup the environment using
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/techops-recsys-lateral-hiring/dataengineer-transformations-python)
-
-It's recommend that you setup ssh to Gitpod so that you can use VS Code from local to remote to Gitpod.
-
-There's an initialize script setup that takes around 3 minutes to complete. Once you use paste this repository link in new Workspace, please wait until the packages are installed. After everything is setup, select Poetry's environment by clicking on thumbs up icon and navigate to Testing tab and hit refresh icon to discover tests.
-
-### Common issue with VS Code's Testing
-
-If Testing tab complains about Python Interpreter, run `poetry shell` in terminal to get the bin path, replace activate with python3 to resolve the issue.
-
-If poetry shell activate with this path
-
-`/workspace/.pyenv_mirror/poetry/virtualenvs/{project_name}-py{python_version}/bin/activate`
-
-Paste this into Python Interpreter prompt
-
-`/workspace/.pyenv_mirror/poetry/virtualenvs/{project_name}-py{python_version}/bin/python3`
+---

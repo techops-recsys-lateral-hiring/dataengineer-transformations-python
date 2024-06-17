@@ -23,10 +23,10 @@ jobs:
           poetry install
       - name: Run local unit tests
         run: |
-          ./go.sh run-local-unit-test
+          poetry run python -m pytest tests/unit
       - name: Run local integration tests
         run: |
-          ./go.sh run-local-integration-test
+          poetry run python -m pytest tests/integration
 
   windows:
     runs-on: windows-latest
@@ -69,7 +69,7 @@ jobs:
           poetry install
       - name: Run local unit tests
         run: |
-          .\go.ps1 run-local-unit-test
+          poetry run python -m pytest tests/unit
       - name: Run local integration tests
         run: |
-          .\go.ps1 run-local-integration-test
+          poetry run python -m pytest tests/integration
