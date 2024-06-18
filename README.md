@@ -148,7 +148,7 @@ It reads the previously ingested data parquet files.
 
 Hint:
 
-- For distance calculation, consider using [**Harvesine formula**](https://en.wikipedia.org/wiki/Haversine_formula) as an option.
+- For distance calculation, consider using [**Haversine formula**](https://en.wikipedia.org/wiki/Haversine_formula) as an option.
 
 ##### Input
 
