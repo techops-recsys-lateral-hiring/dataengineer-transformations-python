@@ -22,7 +22,7 @@ TODO : Add a link to a spark Tutorial
 
 ### Local Setup
 
-> 💡 If you don't manage to run the local setup, use the [gitpod](#gitpod-setup) one
+> 💡 If you don't manage to run the local setup or you have restrictions to install software in your laptop, use the [gitpod](#gitpod-setup) one
 
 #### Pre-requisites
 
