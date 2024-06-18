@@ -3,22 +3,19 @@
 This coding challenge is a collection of _Python_ jobs that are supposed to extract, transform and load data.
 These jobs are using _PySpark_ to process larger volumes of data and are supposed to run on a _Spark_ cluster (via `spark-submit`).
 
-## Before the interview
+## Gearing Up for the Pairing Session
 
 **✅ Goals**
 
-- **Get a working environment**  
-  Either local ([local](#local-setup), or using gitpod)
-- **Get an overview of the codebase and technologies involved**
+1. **Get a working environment**  
+   Either local ([local](#local-setup), or using [gitpod](#gitpod-setup))
+2. **Get a high-level understanding of the code and test dataset structure**
+3. Have your preferred text editor or IDE setup and ready to go.
 
 **❌ Non-Goals**
 
 - solving the exercises / writing code
-  > The exercises will be given at the time of interview, and solved by pairing with the interviewer.
-
-<!---
-TODO : Add a link to a spark Tutorial
----->
+  > ⚠️ The exercises will be given at the time of interview, and solved by pairing with the interviewer.
 
 ### Local Setup
 
@@ -60,7 +57,7 @@ Remember to stop the vm and restart it just before the interview.
 
 ### Verify setup
 
-The following commands should be running successfully
+> All of the following commands should be running successfully
 
 #### Run unit tests
 
@@ -85,6 +82,7 @@ poetry run pylint data_transformations tests
 
 ### Anything else?
 
+All commands are passing?  
 You are good to go!
 
 > ⚠️ do not try to solve the exercises ahead of the interview
@@ -95,7 +93,7 @@ You are allowed to customize your environment (having the test in vscode directl
 
 There are two exercises in this repo: Word Count, and Citibike.
 
-Currently, these exist as skeletons, and have some initial test cases which are defined but ignored.
+Currently, these exist as skeletons, and have some **initial test cases** which are defined but some are skipped.
 
 The following section provides context over them.
 
@@ -270,3 +268,10 @@ poetry build && poetry run spark-submit \
 > ⚠️ do not try to solve the exercises ahead of the interview
 
 ---
+
+## Reading List
+
+If you are unfamiliar with some of the tools used here, we recommend some resources to get started
+
+- **pytest**: [official](https://docs.pytest.org/en/8.2.x/getting-started.html#get-started)
+- **pyspark**: [official](https://spark.apache.org/docs/latest/api/python/index.html) and especially the [DataFrame quickstart](https://spark.apache.org/docs/latest/api/python/getting_started/quickstart_df.html)
