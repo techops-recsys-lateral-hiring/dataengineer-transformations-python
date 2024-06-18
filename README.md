@@ -28,8 +28,7 @@ TODO : Add a link to a spark Tutorial
 
 Please make sure you have the following installed and can run them
 
-- Python (3.11.X),  
-  you can use for example [pyenv](https://github.com/pyenv/pyenv#installation) to manage your python versions locally
+- Python (3.11.X), you can use for example [pyenv](https://github.com/pyenv/pyenv#installation) to manage your python versions locally
 - [Poetry](https://python-poetry.org/docs/#installation)
 - Java (11), you can use [sdkman](https://sdkman.io/) to install and manage java locally
 
