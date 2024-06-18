@@ -7,9 +7,7 @@ image:
 
 tasks:
   - init: |
-      pyenv install 3.11.4
-      pyenv shell 3.11.4
-      poetry env use "${HOME}/.pyenv/versions/3.11.4/bin/python3"
       poetry install
       poetry env info
-      make tests
+      poetry run python -m pytest test/unit
+      poetry run python -m pytest tests/integration
