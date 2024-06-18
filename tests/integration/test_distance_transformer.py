@@ -3,10 +3,10 @@ import tempfile
 from typing import Tuple
 
 import pytest
+from pyspark.sql import SparkSession
 from pyspark.sql.types import StructField, DoubleType
 
 from data_transformations.citibike import distance_transformer
-from tests.integration import SPARK
 
 BASE_COLUMNS = [
     "tripduration",
@@ -81,8 +81,8 @@ SAMPLE_DATA = [
 ]
 
 
-def test_should_maintain_all_data_it_reads() -> None:
-    given_ingest_folder, given_transform_folder = __create_ingest_and_transform_folders()
+def test_should_maintain_all_data_it_reads(SPARK) -> None:
+    given_ingest_folder, given_transform_folder = __create_ingest_and_transform_folders(SPARK)
     given_dataframe = SPARK.read.parquet(given_ingest_folder)
     distance_transformer.run(SPARK, given_ingest_folder, given_transform_folder)
 
@@ -97,7 +97,7 @@ def test_should_maintain_all_data_it_reads() -> None:
 
 
 @pytest.mark.skip
-def test_should_add_distance_column_with_calculated_distance() -> None:
+def test_should_add_distance_column_with_calculated_distance(SPARK) -> None:
     given_ingest_folder, given_transform_folder = __create_ingest_and_transform_folders()
     distance_transformer.run(SPARK, given_ingest_folder, given_transform_folder)
 
@@ -117,10 +117,10 @@ def test_should_add_distance_column_with_calculated_distance() -> None:
     assert expected_dataframe.collect() == actual_dataframe.collect()
 
 
-def __create_ingest_and_transform_folders() -> Tuple[str, str]:
+def __create_ingest_and_transform_folders(spark: SparkSession) -> Tuple[str, str]:
     base_path = tempfile.mkdtemp()
     ingest_folder = "%s%singest" % (base_path, os.path.sep)
     transform_folder = "%s%stransform" % (base_path, os.path.sep)
-    ingest_dataframe = SPARK.createDataFrame(SAMPLE_DATA, BASE_COLUMNS)
+    ingest_dataframe = spark.createDataFrame(SAMPLE_DATA, BASE_COLUMNS)
     ingest_dataframe.write.parquet(ingest_folder, mode='overwrite')
     return ingest_folder, transform_folder
