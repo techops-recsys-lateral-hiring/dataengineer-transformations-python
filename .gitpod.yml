@@ -9,5 +9,5 @@ tasks:
   - init: |
       poetry install
       poetry env info
-      poetry run python -m pytest test/unit
+      poetry run python -m pytest tests/unit
       poetry run python -m pytest tests/integration
