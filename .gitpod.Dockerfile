@@ -4,8 +4,8 @@ FROM gitpod/workspace-python
 USER root
 WORKDIR /opt
 RUN if [ "$(arch)" = "aarch64" ] ; then ARCHITECTURE="aarch64" ; else ARCHITECTURE="x64"; fi && \
-    wget -O OpenJDK.tar.gz https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.11%2B9/OpenJDK11U-jdk_${ARCHITECTURE}_linux_hotspot_11.0.11_9.tar.gz && \
-RUN tar xzf OpenJDK.tar.gz && \
+    wget -O OpenJDK.tar.gz https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.11%2B9/OpenJDK11U-jdk_${ARCHITECTURE}_linux_hotspot_11.0.11_9.tar.gz
+RUN tar xzf OpenJDK.tar.gz
 ENV JAVA_HOME="/opt/jdk-11.0.11+9" \
     PATH="/opt/jdk-11.0.11+9/bin:$PATH"
 
