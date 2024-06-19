@@ -98,7 +98,7 @@ def test_should_maintain_all_data_it_reads(SPARK) -> None:
 
 @pytest.mark.skip
 def test_should_add_distance_column_with_calculated_distance(SPARK) -> None:
-    given_ingest_folder, given_transform_folder = __create_ingest_and_transform_folders()
+    given_ingest_folder, given_transform_folder = __create_ingest_and_transform_folders(SPARK)
     distance_transformer.run(SPARK, given_ingest_folder, given_transform_folder)
 
     actual_dataframe = SPARK.read.parquet(given_transform_folder)
