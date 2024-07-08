@@ -10,7 +10,7 @@ def test_java_home_is_set():
     assert java_home is not None, "Environment variable 'JAVA_HOME' is not set but is required by pySpark to work."
 
 
-def test_java_version_is_greater_or_equal_11(expected_major_version=11):
+def test_java_version_minimum_requirement(expected_major_version=11):
     version_line = __extract_version_line(__java_version_output())
     major_version = __parse_major_version(version_line)
     assert major_version >= expected_major_version, (f"Major version {major_version} is not recent enough, "
