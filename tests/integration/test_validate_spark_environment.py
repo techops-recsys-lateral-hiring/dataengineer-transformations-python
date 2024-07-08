@@ -11,23 +11,28 @@ def test_java_home_is_set():
 
 
 def test_java_version_is_greater_or_equal_11():
-    version_regex = re.compile(r'(?P<major>\d+)\.(?P<minor>\d+)\.\w+')
+    version_regex = re.compile(r'version "(?P<major>\d+)\.(?P<minor>\d+)\.\d+"')
 
     java_version_output = subprocess.check_output(['java', '-version'], stderr=subprocess.STDOUT).decode("utf-8")
     print(f"\n`java -version` returned\n{java_version_output}")
 
-    version_number = java_version_output.splitlines()[0].split('"')[1].strip('"')
-    print(f"Assuming {version_number=} is the version to check.")
+    # Extract the version line
+    version_line = next((line for line in java_version_output.splitlines() if "version" in line), None)
 
-    regex_match = version_regex.search(version_number)
+    if not version_line:
+        pytest.fail("Couldn't find version information in `java -version` output.")
+
+    # Extract the version number directly from the version line
+    regex_match = version_regex.search(version_line)
     if not regex_match:
-        pytest.fail(f"Couldn't parse Java version from {version_number=} using {version_regex=}.")
-    if regex_match["major"] == "1":
-        # we need to jump this hoop due to Java version naming conventions - it's fun:
-        # https://softwareengineering.stackexchange.com/questions/175075/why-is-java-version-1-x-referred-to-as-java-x
-        actual_major_version = int(regex_match["minor"])
-    else:
-        actual_major_version = int(regex_match["major"])
+        pytest.fail(f"Couldn't parse Java version from {version_line} using {version_regex=}.")
+
+    major_version = int(regex_match["major"])
+
+    # Handle the case where major version is 1 (legacy versions)
+    if major_version == 1:
+        major_version = int(regex_match["minor"])
+
     expected_major_version = 11
-    assert actual_major_version >= expected_major_version, (f"Major version {actual_major_version} is not recent "
-                                                            f"enough, we need at least version {expected_major_version}.")
+    assert major_version >= expected_major_version, (f"Major version {major_version} is not recent enough, "
+                                                     f"we need at least version {expected_major_version}.")
