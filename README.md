@@ -138,7 +138,7 @@ There is a dump of the datalake for this under `resources/word_count/words.txt` 
 
 ```mermaid
 ---
-title: Citibike Pipeline
+title: Wordcount Pipeline
 ---
 flowchart LR
   Raw["fa:fa-file words.txt"] -->  J1{{word_count.py}} --> Bronze["fa:fa-file-csv word_count.csv"]
