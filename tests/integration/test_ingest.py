@@ -3,10 +3,12 @@ import os
 import tempfile
 from typing import Tuple, List
 
+from pyspark.sql import SparkSession
+
 from data_transformations.citibike import ingest
 
 
-def test_should_sanitize_column_names(SPARK) -> None:
+def test_should_sanitize_column_names(spark_session: SparkSession) -> None:
     given_ingest_folder, given_transform_folder = __create_ingest_and_transform_folders()
     input_csv_path = given_ingest_folder + 'input.csv'
     csv_content = [
@@ -15,10 +17,10 @@ def test_should_sanitize_column_names(SPARK) -> None:
         ['1', '5', '2'],
     ]
     __write_csv_file(input_csv_path, csv_content)
-    ingest.run(SPARK, input_csv_path, given_transform_folder)
+    ingest.run(spark_session, input_csv_path, given_transform_folder)
 
-    actual = SPARK.read.parquet(given_transform_folder)
-    expected = SPARK.createDataFrame(
+    actual = spark_session.read.parquet(given_transform_folder)
+    expected = spark_session.createDataFrame(
         [
             ['3', '4', '1'],
             ['1', '5', '2']
