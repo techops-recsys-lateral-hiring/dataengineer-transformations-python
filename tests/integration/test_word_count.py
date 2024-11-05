@@ -20,7 +20,7 @@ def _get_file_paths(input_file_lines: List[str]) -> Tuple[str, str]:
 
 
 @pytest.mark.skip
-def test_should_tokenize_words_and_count_them(SPARK: SparkSession) -> None:
+def test_should_tokenize_words_and_count_them(spark_session: SparkSession) -> None:
     lines = [
         "In my younger and more vulnerable years my father gave me some advice that I've been "
         "turning over in my mind ever since. \"Whenever you feel like criticising any one,\""
@@ -47,9 +47,9 @@ def test_should_tokenize_words_and_count_them(SPARK: SparkSession) -> None:
     ]
     input_file_path, output_path = _get_file_paths(lines)
 
-    word_count_transformer.run(SPARK, input_file_path, output_path)
+    word_count_transformer.run(spark_session, input_file_path, output_path)
 
-    actual = SPARK.read.csv(output_path, header=True, inferSchema=True)
+    actual = spark_session.read.csv(output_path, header=True, inferSchema=True)
     expected_data = [
         ["a", 4],
         ["across", 1],
@@ -259,6 +259,6 @@ def test_should_tokenize_words_and_count_them(SPARK: SparkSession) -> None:
         ["you've", 1],
         ["younger", 1],
     ]
-    expected = SPARK.createDataFrame(expected_data, ["word", "count"])
+    expected = spark_session.createDataFrame(expected_data, ["word", "count"])
 
     assert actual.collect() == expected.collect()

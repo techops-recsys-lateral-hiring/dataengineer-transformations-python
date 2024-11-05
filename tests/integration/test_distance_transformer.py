@@ -81,12 +81,13 @@ SAMPLE_DATA = [
 ]
 
 
-def test_should_maintain_all_data_it_reads(SPARK: SparkSession) -> None:
-    given_ingest_folder, given_transform_folder = __create_ingest_and_transform_folders(SPARK)
-    given_dataframe = SPARK.read.parquet(given_ingest_folder)
-    distance_transformer.run(SPARK, given_ingest_folder, given_transform_folder)
+def test_should_maintain_all_data_it_reads(spark_session: SparkSession) -> None:
+    given_ingest_folder, given_transform_folder = __create_ingest_and_transform_folders(
+        spark_session)
+    given_dataframe = spark_session.read.parquet(given_ingest_folder)
+    distance_transformer.run(spark_session, given_ingest_folder, given_transform_folder)
 
-    actual_dataframe = SPARK.read.parquet(given_transform_folder)
+    actual_dataframe = spark_session.read.parquet(given_transform_folder)
     actual_columns = set(actual_dataframe.columns)
     actual_schema = set(actual_dataframe.schema)
     expected_columns = set(given_dataframe.columns)
@@ -97,12 +98,13 @@ def test_should_maintain_all_data_it_reads(SPARK: SparkSession) -> None:
 
 
 @pytest.mark.skip
-def test_should_add_distance_column_with_calculated_distance(SPARK: SparkSession) -> None:
-    given_ingest_folder, given_transform_folder = __create_ingest_and_transform_folders(SPARK)
-    distance_transformer.run(SPARK, given_ingest_folder, given_transform_folder)
+def test_should_add_distance_column_with_calculated_distance(spark_session: SparkSession) -> None:
+    given_ingest_folder, given_transform_folder = __create_ingest_and_transform_folders(
+        spark_session)
+    distance_transformer.run(spark_session, given_ingest_folder, given_transform_folder)
 
-    actual_dataframe = SPARK.read.parquet(given_transform_folder)
-    expected_dataframe = SPARK.createDataFrame(
+    actual_dataframe = spark_session.read.parquet(given_transform_folder)
+    expected_dataframe = spark_session.createDataFrame(
         [
             SAMPLE_DATA[0] + [1.07],
             SAMPLE_DATA[1] + [0.92],
