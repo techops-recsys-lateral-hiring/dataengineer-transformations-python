@@ -81,7 +81,7 @@ SAMPLE_DATA = [
 ]
 
 
-def test_should_maintain_all_data_it_reads(SPARK) -> None:
+def test_should_maintain_all_data_it_reads(SPARK: SparkSession) -> None:
     given_ingest_folder, given_transform_folder = __create_ingest_and_transform_folders(SPARK)
     given_dataframe = SPARK.read.parquet(given_ingest_folder)
     distance_transformer.run(SPARK, given_ingest_folder, given_transform_folder)
@@ -97,7 +97,7 @@ def test_should_maintain_all_data_it_reads(SPARK) -> None:
 
 
 @pytest.mark.skip
-def test_should_add_distance_column_with_calculated_distance(SPARK) -> None:
+def test_should_add_distance_column_with_calculated_distance(SPARK: SparkSession) -> None:
     given_ingest_folder, given_transform_folder = __create_ingest_and_transform_folders(SPARK)
     distance_transformer.run(SPARK, given_ingest_folder, given_transform_folder)
 
