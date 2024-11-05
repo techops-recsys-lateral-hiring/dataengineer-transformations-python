@@ -31,14 +31,12 @@ def __extract_version_line(java_version_output:str) -> str:
     return version_line
 
 
-def __parse_major_version(version_line:str) -> Optional[int]:
+def __parse_major_version(version_line:str) -> int:
     version_regex = re.compile(r'version "(?P<major>\d+)\.(?P<minor>\d+)\.\d+"')
     match = version_regex.search(version_line)
-    if not match:
-        return None
-    major_version = int(match.group("major"))
-    if major_version == 1:
-        major_version = int(match.group("minor"))
-    if major_version is None:
-        pytest.fail(f"Couldn't parse Java version from {version_line}.")
-    return major_version
+    if match:
+        major_version = int(match.group("major"))
+        if major_version == 1: # Java 8 reports version as 1.actual_major.actual_minor
+            major_version = int(match.group("minor"))
+        return major_version
+    pytest.fail(f"Couldn't parse Java version from {version_line}.")
