@@ -22,9 +22,9 @@ These jobs are using _PySpark_ to process larger volumes of data and are suppose
 
 Please make sure you have the following installed and can run them
 
-- Python (3.11.X), you can use for example [pyenv](https://github.com/pyenv/pyenv#installation) to manage your python versions locally
+- Python (3.13.X), you can use for example [pyenv](https://github.com/pyenv/pyenv#installation) to manage your python versions locally
 - [Poetry](https://python-poetry.org/docs/#installation)
-- Java (11), you can use [sdkman](https://sdkman.io/) to install and manage java locally
+- Java (17), you can use [sdkman](https://sdkman.io/) to install and manage java locally
 
 #### Windows users
 
@@ -60,7 +60,7 @@ poetry run pytest tests/integration
 poetry run mypy --ignore-missing-imports --disallow-untyped-calls --disallow-untyped-defs --disallow-incomplete-defs \
             data_transformations tests
 
-poetry run pylint data_transformations tests
+poetry run ruff format && poetry run ruff check
 ```
 
 ### Anything else?
