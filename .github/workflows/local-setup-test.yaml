@@ -11,12 +11,12 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: "zulu"
-          java-version: "11"
+          java-version: "17"
       - name: Install poetry
         run: pipx install poetry
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: "3.13"
           cache: "poetry"
       - name: Install Python Dependencies
         run: |
@@ -40,12 +40,12 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: "zulu"
-          java-version: "11"
+          java-version: "17"
       - name: Install poetry
         run: pipx install poetry
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: "3.13"
           cache: "poetry"
       - name: Install Hadoop for Windows
         # See https://cwiki.apache.org/confluence/display/HADOOP2/WindowsProblems
