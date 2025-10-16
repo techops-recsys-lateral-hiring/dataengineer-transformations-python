@@ -7,8 +7,7 @@ These jobs are using _PySpark_ to process larger volumes of data and are suppose
 
 **✅ Goals**
 
-1. **Get a working environment**  
-   Either local ([local](#local-setup), or using [gitpod](#gitpod-setup))
+1. **Get a working environment** See local [local](#local-setup)
 2. **Get a high-level understanding of the code and test dataset structure**
 3. Have your preferred text editor or IDE setup and ready to go.
 
@@ -18,8 +17,6 @@ These jobs are using _PySpark_ to process larger volumes of data and are suppose
   > ⚠️ The exercises will be given at the time of interview, and solved by pairing with the interviewer.
 
 ### Local Setup
-
-> 💡 If you don't manage to run the local setup or you have restrictions to install software in your laptop, use the [gitpod](#gitpod-setup) one
 
 #### Pre-requisites
 
@@ -35,25 +32,11 @@ We recommend using WSL 2 on Windows for this exercise, due to the [lack of suppo
 
 Follow instructions on the [Windows official page](https://learn.microsoft.com/en-us/windows/wsl/setup/environment)
 
-> 💡 In case of issues, like missing permissions on the machine, please use the [gitpod setup](#gitpod-setup)
-
 #### Install all dependencies
 
 ```bash
 poetry install
 ```
-
-### Gitpod setup
-
-Alternatively, you can setup the environment using
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/techops-recsys-lateral-hiring/dataengineer-transformations-python)
-
-There's an initialize script setup that takes around 3 minutes to complete. Once you use paste this repository link in new Workspace, please wait until the packages are installed. After everything is setup, select Poetry's environment by clicking on thumbs up icon and navigate to Testing tab and hit refresh icon to discover tests.
-
-Note that you can use gitpod's web interface or setup [ssh to Gitpod](https://www.gitpod.io/docs/references/ides-and-editors/vscode#connecting-to-vs-code-desktop) so that you can use VS Code from local to remote to Gitpod
-
-Remember to stop the vm and restart it just before the interview.
 
 ### Verify setup
 
@@ -119,7 +102,6 @@ The following section provides context over them.
 │ # and the setup
 │
 ├─ .gitignore
-├─ .gitpod\* # required for the gitpod setup
 ├─ .pylintrc # configuration for pylint
 ├─ LICENCE
 ├─ poetry.lock
