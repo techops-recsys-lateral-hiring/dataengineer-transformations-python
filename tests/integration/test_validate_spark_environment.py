@@ -12,7 +12,7 @@ def test_java_home_is_set() -> None:
     )
 
 
-def test_java_version_minimum_requirement(expected_major_version: int = 11) -> None:
+def test_java_version_minimum_requirement(expected_major_version: int = 17) -> None:
     version_line = __extract_version_line(__java_version_output())
     major_version = __parse_major_version(version_line)
     assert major_version >= expected_major_version, (
@@ -22,8 +22,8 @@ def test_java_version_minimum_requirement(expected_major_version: int = 11) -> N
 
 
 def __java_version_output() -> str:
-    java_version = subprocess.check_output(
-        ["java", "-version"], stderr=subprocess.STDOUT
+    java_version = subprocess.check_output(  # noqa: S603
+        [f"{os.environ['JAVA_HOME']}/bin/java", "-version"], stderr=subprocess.STDOUT
     ).decode("utf-8")
     print(f"\n`java -version` returned\n{java_version}")
     return java_version

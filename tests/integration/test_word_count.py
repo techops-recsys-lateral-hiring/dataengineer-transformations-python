@@ -1,5 +1,6 @@
 import os
 import tempfile
+from pathlib import Path
 from typing import List, Tuple
 
 import pytest
@@ -12,7 +13,7 @@ def _get_file_paths(input_file_lines: List[str]) -> Tuple[str, str]:
     base_path = tempfile.mkdtemp()
 
     input_text_path = "%s%sinput.txt" % (base_path, os.path.sep)
-    with open(input_text_path, "w") as input_file:
+    with Path(input_text_path).open(mode="w") as input_file:
         input_file.writelines(input_file_lines)
 
     output_path = "%s%soutput" % (base_path, os.path.sep)

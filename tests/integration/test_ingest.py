@@ -1,6 +1,7 @@
 import csv
 import os
 import tempfile
+from pathlib import Path
 from typing import List, Tuple
 
 from pyspark.sql import SparkSession
@@ -38,7 +39,6 @@ def __create_ingest_and_transform_folders() -> Tuple[str, str]:
 
 
 def __write_csv_file(file_path: str, content: List[List[str]]) -> None:
-    with open(file_path, "w") as csv_file:
+    with Path(file_path).open(mode="w") as csv_file:
         input_csv_writer = csv.writer(csv_file)
         input_csv_writer.writerows(content)
-        csv_file.close()
