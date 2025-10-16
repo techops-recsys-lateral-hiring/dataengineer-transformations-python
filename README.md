@@ -30,7 +30,7 @@ Please make sure you have the following installed and can run them
 
 We recommend using WSL 2 on Windows for this exercise, due to the [lack of support](https://cwiki.apache.org/confluence/display/HADOOP2/WindowsProblems) of windows paths from Hadoop/Spark.
 
-Follow instructions on the [Windows official page](https://learn.microsoft.com/en-us/windows/wsl/setup/environment)
+Follow instructions on the [Windows official page](https://learn.microsoft.com/en-us/windows/wsl/setup/environment) and then the linux install.
 
 #### Install all dependencies
 
