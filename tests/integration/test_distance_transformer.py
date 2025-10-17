@@ -4,7 +4,7 @@ from typing import Tuple
 
 import pytest
 from pyspark.sql import SparkSession
-from pyspark.sql.types import StructField, DoubleType
+from pyspark.sql.types import DoubleType, StructField
 
 from data_transformations.citibike import distance_transformer
 
@@ -42,7 +42,7 @@ SAMPLE_DATA = [
         27937,
         "Subscriber",
         1984,
-        2
+        2,
     ],
     [
         1496,
@@ -59,7 +59,7 @@ SAMPLE_DATA = [
         15933,
         "Customer",
         1971,
-        1
+        1,
     ],
     [
         1067,
@@ -76,14 +76,15 @@ SAMPLE_DATA = [
         27084,
         "Subscriber",
         1990,
-        2
-    ]
+        2,
+    ],
 ]
 
 
 def test_should_maintain_all_data_it_reads(spark_session: SparkSession) -> None:
     given_ingest_folder, given_transform_folder = __create_ingest_and_transform_folders(
-        spark_session)
+        spark_session
+    )
     given_dataframe = spark_session.read.parquet(given_ingest_folder)
     distance_transformer.run(spark_session, given_ingest_folder, given_transform_folder)
 
@@ -98,9 +99,12 @@ def test_should_maintain_all_data_it_reads(spark_session: SparkSession) -> None:
 
 
 @pytest.mark.skip
-def test_should_add_distance_column_with_calculated_distance(spark_session: SparkSession) -> None:
+def test_should_add_distance_column_with_calculated_distance(
+    spark_session: SparkSession,
+) -> None:
     given_ingest_folder, given_transform_folder = __create_ingest_and_transform_folders(
-        spark_session)
+        spark_session
+    )
     distance_transformer.run(spark_session, given_ingest_folder, given_transform_folder)
 
     actual_dataframe = spark_session.read.parquet(given_transform_folder)
@@ -110,10 +114,10 @@ def test_should_add_distance_column_with_calculated_distance(spark_session: Spar
             SAMPLE_DATA[1] + [0.92],
             SAMPLE_DATA[2] + [1.99],
         ],
-        BASE_COLUMNS + ['distance']
+        [*BASE_COLUMNS, "distance"],
     )
-    expected_distance_schema = StructField('distance', DoubleType(), nullable=True)
-    actual_distance_schema = actual_dataframe.schema['distance']
+    expected_distance_schema = StructField("distance", DoubleType(), nullable=True)
+    actual_distance_schema = actual_dataframe.schema["distance"]
 
     assert expected_distance_schema == actual_distance_schema
     assert expected_dataframe.collect() == actual_dataframe.collect()
@@ -124,5 +128,5 @@ def __create_ingest_and_transform_folders(spark: SparkSession) -> Tuple[str, str
     ingest_folder = "%s%singest" % (base_path, os.path.sep)
     transform_folder = "%s%stransform" % (base_path, os.path.sep)
     ingest_dataframe = spark.createDataFrame(SAMPLE_DATA, BASE_COLUMNS)
-    ingest_dataframe.write.parquet(ingest_folder, mode='overwrite')
+    ingest_dataframe.write.parquet(ingest_folder, mode="overwrite")
     return ingest_folder, transform_folder

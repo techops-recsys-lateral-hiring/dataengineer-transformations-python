@@ -2,7 +2,7 @@ from data_transformations.citibike import ingest
 
 
 def test_should_sanitize_nothing() -> None:
-    no_whitespace_columns = ['foo']
+    no_whitespace_columns = ["foo"]
 
     actual = ingest.sanitize_columns(no_whitespace_columns)
     expected = no_whitespace_columns
@@ -11,18 +11,18 @@ def test_should_sanitize_nothing() -> None:
 
 
 def test_should_sanitize_whitespace_outside() -> None:
-    no_whitespace_columns = [' foo ']
+    no_whitespace_columns = [" foo "]
 
     actual = ingest.sanitize_columns(no_whitespace_columns)
-    expected = ['_foo_']
+    expected = ["_foo_"]
 
     assert expected == actual
 
 
 def test_should_sanitize_whitespace_in_between() -> None:
-    no_whitespace_columns = ['foo bar']
+    no_whitespace_columns = ["foo bar"]
 
     actual = ingest.sanitize_columns(no_whitespace_columns)
-    expected = ['foo_bar']
+    expected = ["foo_bar"]
 
     assert expected == actual

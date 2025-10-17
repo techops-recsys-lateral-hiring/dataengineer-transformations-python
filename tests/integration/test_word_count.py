@@ -1,6 +1,7 @@
 import os
 import tempfile
-from typing import Tuple, List
+from pathlib import Path
+from typing import List, Tuple
 
 import pytest
 from pyspark.sql import SparkSession
@@ -12,7 +13,7 @@ def _get_file_paths(input_file_lines: List[str]) -> Tuple[str, str]:
     base_path = tempfile.mkdtemp()
 
     input_text_path = "%s%sinput.txt" % (base_path, os.path.sep)
-    with open(input_text_path, 'w') as input_file:
+    with Path(input_text_path).open(mode="w") as input_file:
         input_file.writelines(input_file_lines)
 
     output_path = "%s%soutput" % (base_path, os.path.sep)
@@ -23,7 +24,7 @@ def _get_file_paths(input_file_lines: List[str]) -> Tuple[str, str]:
 def test_should_tokenize_words_and_count_them(spark_session: SparkSession) -> None:
     lines = [
         "In my younger and more vulnerable years my father gave me some advice that I've been "
-        "turning over in my mind ever since. \"Whenever you feel like criticising any one,\""
+        'turning over in my mind ever since. "Whenever you feel like criticising any one,"'
         " he told me, \"just remember that all the people in this world haven't had the advantages"
         " that you've had.\"",
         "Most of the big shore places were closed now and there were hardly any lights except the "
@@ -43,7 +44,7 @@ def test_should_tokenize_words_and_count_them(spark_session: SparkSession) -> No
         "Gatsby believed in the green light, the orgastic future that year by year recedes before "
         "us. It eluded us then, but that's no matter--tomorrow we will run faster, stretch out our "
         "arms farther.... And one fine morning----",
-        "So we beat on, boats against the current, borne back ceaselessly into the past.      "
+        "So we beat on, boats against the current, borne back ceaselessly into the past.      ",
     ]
     input_file_path, output_path = _get_file_paths(lines)
 

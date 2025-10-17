@@ -11,61 +11,21 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: "zulu"
-          java-version: "11"
+          java-version: "17"
       - name: Install poetry
         run: pipx install poetry
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: "3.13"
           cache: "poetry"
       - name: Install Python Dependencies
         run: |
           poetry install
-      - name: Run local unit tests
+      - name: Run style and type checks
         run: |
-          poetry run python -m pytest tests/unit
-      - name: Run local integration tests
-        run: |
-          poetry run python -m pytest tests/integration
-
-  windows:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
-        with:
-          distribution: "zulu"
-          java-version: "11"
-      - name: Install poetry
-        run: pipx install poetry
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-          cache: "poetry"
-      - name: Install Hadoop for Windows
-        # See https://cwiki.apache.org/confluence/display/HADOOP2/WindowsProblems
-        # that recommends https://github.com/steveloughran/winutils
-        # that recommends https://github.com/cdarlint/winutils
-        #
-        # Setting environement variables: e.g.
-        # $env:HADOOP_HOME = "$pwd\winutils\hadoop-3.3.5"
-        # $env:Path += ";$pwd\winutils\hadoop-3.3.5\bin"
-        # requires a special handling: https://stackoverflow.com/questions/61858388/how-do-i-set-an-enviroment-variable-in-github-action-on-a-windows-server
-        #
-        # Reading / Writing to parquet through winutils requires Microsoft Visual C++ 2010 Service Pack 1
-        # https://stackoverflow.com/questions/45947375/why-does-starting-a-streaming-query-lead-to-exitcodeexception-exitcode-1073741
-        run: |
-          choco install vcredist2010
-          git clone --depth 1 -b master https://github.com/cdarlint/winutils.git
-          echo "HADOOP_HOME=$pwd\winutils\hadoop-3.3.5" >> $env:GITHUB_ENV
-          echo ";$pwd\winutils\hadoop-3.3.5\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-
-      - name: Test Hadoop Setup
-        run: |
-          winutils.exe chmod 777 D:\a\dataengineer-transformations-python\dataengineer-transformations-python
-      - name: Install Python Dependencies
-        run: |
-          poetry install
+          poetry run ruff format && poetry run ruff check
+          poetry run mypy --ignore-missing-imports --disallow-untyped-calls --disallow-untyped-defs --disallow-incomplete-defs \
+            data_transformations tests
       - name: Run local unit tests
         run: |
           poetry run python -m pytest tests/unit

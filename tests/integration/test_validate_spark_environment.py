@@ -7,28 +7,32 @@ import pytest
 
 def test_java_home_is_set() -> None:
     java_home = os.environ.get("JAVA_HOME")
-    assert java_home is not None, \
+    assert java_home is not None, (
         "Environment variable 'JAVA_HOME' is not set but is required by pySpark to work."
+    )
 
 
-def test_java_version_minimum_requirement(expected_major_version: int = 11) -> None:
+def test_java_version_minimum_requirement(expected_major_version: int = 17) -> None:
     version_line = __extract_version_line(__java_version_output())
     major_version = __parse_major_version(version_line)
     assert major_version >= expected_major_version, (
         f"Major version {major_version} is not recent enough, "
-        f"we need at least version {expected_major_version}.")
+        f"we need at least version {expected_major_version}."
+    )
 
 
 def __java_version_output() -> str:
-    java_version = subprocess.check_output(['java', '-version'], stderr=subprocess.STDOUT).decode(
-        "utf-8")
+    java_version = subprocess.check_output(  # noqa: S603
+        [f"{os.environ['JAVA_HOME']}/bin/java", "-version"], stderr=subprocess.STDOUT
+    ).decode("utf-8")
     print(f"\n`java -version` returned\n{java_version}")
     return java_version
 
 
 def __extract_version_line(java_version_output: str) -> str:
-    version_line = next((line for line in java_version_output.splitlines() if "version" in line),
-                        None)
+    version_line = next(
+        (line for line in java_version_output.splitlines() if "version" in line), None
+    )
     if not version_line:
         pytest.fail("Couldn't find version information in `java -version` output.")
     return version_line
