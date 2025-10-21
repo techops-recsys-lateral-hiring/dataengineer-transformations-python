@@ -3,22 +3,24 @@
 This coding challenge is a collection of _Python_ jobs that are supposed to extract, transform and load data.
 These jobs are using _PySpark_ to process larger volumes of data and are supposed to run on a _Spark_ cluster (via `spark-submit`).
 
-## Gearing Up for the Pairing Session
+## Preparing for the interview
 
-**✅ Goals**
+> [!WARNING]
+> The exercises will be given at the time of interview, and **solved by pairing with the interviewer**.  
+> Please do not solve the exercises before the interview.
 
-1. **Get a working environment** See local [local](#local-setup)
-2. **Get a high-level understanding of the code and test dataset structure**
+**✅ Goals:**
+
+1. **Get a [working environment set up](#setup-the-environment).** You can setup a [local environment](#option-1-local-setup), use a [devcontainer](#option-2-devcontainer-setup) or use [Github codespaces](#option-3-github-codespaces).
+2. 2. **Get a high-level understanding of the code and test dataset structure**
 3. Have your preferred text editor or IDE setup and ready to go.
+4. ⚠️ Don't solve the exercises before the interview. ⚠️
 
-**❌ Non-Goals**
+## Setup the environment
+### Option 1: Local Setup
 
-- solving the exercises / writing code
-  > ⚠️ The exercises will be given at the time of interview, and solved by pairing with the interviewer.
-
-### Local Setup
-
-> 💡 Use the [Devcontainer setup](#devcontainer-setup) if you encounter issues.
+> [!TIP]
+> Use the [Devcontainer setup](#option-2-devcontainer-setup) if you encounter issues.
 
 #### Pre-requisites
 
@@ -32,9 +34,8 @@ Please make sure you have the following installed and can run them
 
 We recommend using WSL 2 on Windows for this exercise, due to the [lack of support](https://cwiki.apache.org/confluence/display/HADOOP2/WindowsProblems) of windows paths from Hadoop/Spark.
 
-Follow instructions on the [Windows official page](https://learn.microsoft.com/en-us/windows/wsl/setup/environment) and then the linux install.
-
-> 💡 Use the [Devcontainer setup](#devcontainer-setup) if you encounter issues.
+Follow instructions on the [Windows official page](https://learn.microsoft.com/en-us/windows/wsl/setup/environment) and then the linux install.  
+Use the [Devcontainer setup](#option-2-devcontainer-setup) if you encounter issues.
 
 #### Install all dependencies
 
@@ -42,13 +43,14 @@ Follow instructions on the [Windows official page](https://learn.microsoft.com/e
 poetry install
 ```
 
-### Devcontainer setup
+### Option 2: Devcontainer setup
 
 Configuration to use dev containers is provided in `.devcontainer`
 
-> ⚠️ this take up to 7 minutes to setup, make sure to have things running before the interview.
+> [!WARNING]
+> This takes up to 7 minutes to setup, make sure to have things running before the interview.
 
-### In Github codespaces
+### Option 3: Github codespaces
 
 1. [Fork](https://github.com/techops-recsys-lateral-hiring/dataengineer-transformations-python/fork) this repository.
 2. Follow [codespace instructions](https://docs.github.com/en/codespaces/developing-in-a-codespace/creating-a-codespace-for-a-repository#the-codespace-creation-process) from the forked repository, to create the environment.
@@ -59,23 +61,23 @@ This requires a working local docker setup matching your OS and licensing situat
 
 If you have all of these, follow instructions in https://code.visualstudio.com/docs/devcontainers/containers. Otherwise, consider using codespaces.
 
-### Verify setup
+## Verify setup
 
-> All of the following commands should be running successfully
+All of the following tests should be running successfully
 
-#### Run unit tests
+### Run unit tests
 
 ```bash
 poetry run pytest tests/unit
 ```
 
-#### Run integration tests
+### Run integration tests
 
 ```bash
 poetry run pytest tests/integration
 ```
 
-#### Run style checks
+### Run style checks
 
 ```bash
 poetry run mypy --ignore-missing-imports --disallow-untyped-calls --disallow-untyped-defs --disallow-incomplete-defs \
@@ -84,24 +86,29 @@ poetry run mypy --ignore-missing-imports --disallow-untyped-calls --disallow-unt
 poetry run ruff format && poetry run ruff check
 ```
 
-### Anything else?
+### Done!
 
 All commands are passing?  
 You are good to go!
 
-> ⚠️ do not try to solve the exercises ahead of the interview
+> [!WARNING]
+> Remember, do not try to solve the exercises ahead of the interview.
 
-You are allowed to customize your environment (having the test in vscode directly for example): feel free to spend the time making this comfortable for you. This is not an expectation.
+> [!TIP]
+> You are allowed to customize your environment (having the test in vscode directly for example): feel free to spend the time making this comfortable for you. This is not an expectation.
 
-## Jobs
 
-There are two exercises in this repo: Word Count, and Citibike.
+
+## Interview Exercises
+
+There are two exercises in this repo: [Word Count](#word-count), and [Citibike](#citibike).
 
 Currently, these exist as skeletons, and have some **initial test cases** which are defined but some are skipped.
 
-The following section provides context over them.
+The following section provides context over them. Read this before the interview to familiarise yourself with the exercises and its structure.
 
-> ⚠️ do not try to solve the exercises ahead of the interview
+> [!WARNING]
+> Please, do not try to solve the exercises ahead of the interview.
 
 ### Code walk
 
@@ -191,7 +198,7 @@ flowchart TD
 
 There is a dump of the datalake for this under `resources/citibike/citibike.csv` with historical data.
 
-#### Ingest
+#### 1. Ingest
 
 Reads a `*.csv` file and transforms it to parquet format. The column names will be sanitized (whitespaces replaced).
 
@@ -226,14 +233,13 @@ poetry build && poetry run spark-submit \
     <OUTPUT_PATH>
 ```
 
-#### Distance calculation
+#### 2. Distance calculation
 
 This job takes bike trip information and adds the "as the crow flies" distance traveled for each trip.
 It reads the previously ingested data parquet files.
 
-Hint:
-
-- For distance calculation, consider using [**Haversine formula**](https://www.movable-type.co.uk/scripts/latlong.html) as an option.
+> [!TIP]
+> For distance calculation, consider using [**Haversine formula**](https://www.movable-type.co.uk/scripts/latlong.html) as an option.
 
 ##### Input
 
@@ -266,13 +272,11 @@ poetry build && poetry run spark-submit \
     <OUTPUT_PATH>
 ```
 
----
+> [!WARNING]
+> One last time: do not try to solve the exercises ahead of the interview. 😅
 
-> ⚠️ do not try to solve the exercises ahead of the interview
 
----
-
-## Reading List
+## Resources / Reading list
 
 If you are unfamiliar with some of the tools used here, we recommend some resources to get started
 
