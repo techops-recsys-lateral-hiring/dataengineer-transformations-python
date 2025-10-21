@@ -34,13 +34,15 @@ def __extract_version_line(java_version_output: str) -> str:
         (line for line in java_version_output.splitlines() if "version" in line), None
     )
     if not version_line:
-        pytest.fail("Couldn't find version information in `java -version` output.")
+        pytest.fail(
+            "Couldn't find version information in `java -version` output.")
     return version_line
 
 
 # pylint: disable=R1710
 def __parse_major_version(version_line: str) -> int:
-    version_regex = re.compile(r'version "(?P<major>\d+)\.(?P<minor>\d+)\.\w+"')
+    version_regex = re.compile(
+        r'version "(?P<major>\d+)\.(?P<minor>\d+)\.\w+"')
     match = version_regex.search(version_line)
     if match is not None:
         major_version = int(match.group("major"))
@@ -48,5 +50,12 @@ def __parse_major_version(version_line: str) -> int:
             # we need to jump this hoop due to Java version naming conventions - it's fun:
             # https://softwareengineering.stackexchange.com/questions/175075/why-is-java-version-1-x-referred-to-as-java-x
             major_version = int(match.group("minor"))
+        return major_version
+
+    # Opensource versions follow an alternative system
+    alternative_version_regex = re.compile(r'version "(?P<major>\d+)"')
+    match = alternative_version_regex.search(version_line)
+    if match is not None:
+        major_version = int(match.group("major"))
         return major_version
     pytest.fail(f"Couldn't parse Java version from {version_line}.")

@@ -18,6 +18,8 @@ These jobs are using _PySpark_ to process larger volumes of data and are suppose
 
 ### Local Setup
 
+> 💡 Use the [Devcontainer setup](#devcontainer-setup) if you encounter issues.
+
 #### Pre-requisites
 
 Please make sure you have the following installed and can run them
@@ -32,11 +34,30 @@ We recommend using WSL 2 on Windows for this exercise, due to the [lack of suppo
 
 Follow instructions on the [Windows official page](https://learn.microsoft.com/en-us/windows/wsl/setup/environment) and then the linux install.
 
+> 💡 Use the [Devcontainer setup](#devcontainer-setup) if you encounter issues.
+
 #### Install all dependencies
 
 ```bash
 poetry install
 ```
+
+### Devcontainer setup
+
+Configuration to use dev containers is provided in `.devcontainer`
+
+> ⚠️ this take up to 7 minutes to setup, make sure to have things running before the interview.
+
+### In Github codespaces
+
+1. [Fork](https://github.com/techops-recsys-lateral-hiring/dataengineer-transformations-python/fork) this repository.
+2. Follow [codespace instructions](https://docs.github.com/en/codespaces/developing-in-a-codespace/creating-a-codespace-for-a-repository#the-codespace-creation-process) from the forked repository, to create the environment.
+
+#### In VSCode - Alternative
+
+This requires a working local docker setup matching your OS and licensing situation, and [VSCode](https://code.visualstudio.com/download).
+
+If you have all of these, follow instructions in https://code.visualstudio.com/docs/devcontainers/containers. Otherwise, consider using codespaces.
 
 ### Verify setup
 
@@ -87,6 +108,7 @@ The following section provides context over them.
 ```
 
 /
+├─ /.devcontainer # Contains configurations for dev containers
 ├─ /data_transformations # Contains the main python library
 │ # with the code to the transformations
 │
@@ -102,7 +124,6 @@ The following section provides context over them.
 │ # and the setup
 │
 ├─ .gitignore
-├─ .pylintrc # configuration for pylint
 ├─ LICENCE
 ├─ poetry.lock
 ├─ pyproject.toml
