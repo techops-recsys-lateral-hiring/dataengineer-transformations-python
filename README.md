@@ -20,7 +20,7 @@ These jobs are using _PySpark_ to process larger volumes of data and are suppose
 ### Option 1: Local Setup
 
 > [!TIP]
-> Use the [Devcontainer setup](#option-2-devcontainer-setup) if you encounter issues.
+> Use the [Devcontainer setup](#option-2-devcontainer-setup-github-codespaces) if you encounter issues.
 
 #### Pre-requisites
 
@@ -43,19 +43,17 @@ Use the [Devcontainer setup](#option-2-devcontainer-setup) if you encounter issu
 poetry install
 ```
 
-### Option 2: Devcontainer setup
+### Option 2: Devcontainer setup - Github codespaces
 
 Configuration to use dev containers is provided in `.devcontainer`
 
 > [!WARNING]
 > This takes up to 7 minutes to setup, make sure to have things running before the interview.
 
-### Option 3: Github codespaces
-
 1. [Fork](https://github.com/techops-recsys-lateral-hiring/dataengineer-transformations-python/fork) this repository.
 2. Follow [codespace instructions](https://docs.github.com/en/codespaces/developing-in-a-codespace/creating-a-codespace-for-a-repository#the-codespace-creation-process) from the forked repository, to create the environment.
 
-#### In VSCode - Alternative
+#### Option 3: In VSCode - Alternative
 
 This requires a working local docker setup matching your OS and licensing situation, and [VSCode](https://code.visualstudio.com/download).
 
