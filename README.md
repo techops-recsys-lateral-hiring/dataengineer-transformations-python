@@ -11,7 +11,7 @@ These jobs are using _PySpark_ to process larger volumes of data and are suppose
 
 **✅ Goals:**
 
-1. **Get a [working environment set up](#setup-the-environment).** You can setup a [local environment](#option-1-local-setup), use a [devcontainer](#option-2-devcontainer-setup) or use [Github codespaces](#option-3-github-codespaces).
+1. **Get a [working environment set up](#setup-the-environment).** You can setup a [local environment](#option-1-local-setup), use a [github codespaces](#option-2-devcontainer-setup---github-codespaces) or use [other alternative](#option-3-in-vscode---alternative).
 2. 2. **Get a high-level understanding of the code and test dataset structure**
 3. Have your preferred text editor or IDE setup and ready to go.
 4. ⚠️ Don't solve the exercises before the interview. ⚠️
@@ -20,7 +20,7 @@ These jobs are using _PySpark_ to process larger volumes of data and are suppose
 ### Option 1: Local Setup
 
 > [!TIP]
-> Use the [Devcontainer setup](#option-2-devcontainer-setup-github-codespaces) if you encounter issues.
+> Use the [Devcontainer setup](#option-2-devcontainer-setup---github-codespaces) if you encounter issues.
 
 #### Pre-requisites
 
